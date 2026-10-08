@@ -10,13 +10,21 @@
     // 1. Create or bind the overlay element
     var overlay = document.getElementById('tpsPageTransitionOverlay');
     if (!overlay) {
+      var path = window.location.pathname;
+      var basePrefix = '';
+      if (path.indexOf('/legal/privacy-policy/') !== -1 || path.indexOf('/legal/terms-and-conditions/') !== -1 || path.indexOf('/legal/cookie-policy/') !== -1 || path.indexOf('/legal/disclaimer/') !== -1) {
+        basePrefix = '../../';
+      } else if (path.indexOf('/legal/') !== -1 || path.indexOf('/faq/') !== -1) {
+        basePrefix = '../';
+      }
+
       overlay = document.createElement('div');
       overlay.id = 'tpsPageTransitionOverlay';
       overlay.className = 'tps-page-transition-overlay';
       overlay.innerHTML = 
         '<div class="tps-transition-curtain"></div>' +
         '<div class="tps-transition-brand">' +
-          '<img src="images/tps-logo-circle.png" alt="TPS Empire" class="tps-transition-logo">' +
+          '<img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire" class="tps-transition-logo">' +
           '<div class="tps-transition-loader-bar"></div>' +
         '</div>';
       document.body.appendChild(overlay);
