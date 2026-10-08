@@ -1,0 +1,410 @@
+/* ==========================================================================
+   TPS Empire - Leaders with Vision Frameless Step Reveal
+   - 100% Frameless & Clean (Zero card boxes, zero container borders/shadows)
+   - Repeatable Scroll Animation: Line draws down first, then written content appears
+   - Unique High-Tech Aesthetic Background (Ambient dual glowing aura, matrix grid & reticle)
+   - Brand Color Theme: Royal Blue (#323edd) & Vibrant Amber Orange (#ffa41b)
+   ========================================================================== */
+
+/* Section Wrapper */
+.tps-leaders-vision-section {
+  position: relative;
+  width: 100%;
+  padding: 110px 0 120px;
+  background: #ffffff;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* --------------------------------------------------------------------------
+   Unique Background Layer Elements (Atmospheric Brand Experience)
+   -------------------------------------------------------------------------- */
+.tps-leaders-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 1. Subtle High-Tech Dot Matrix Pattern */
+.tps-leaders-grid-matrix {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(50, 62, 221, 0.12) 1.2px, transparent 1.2px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 75%);
+  opacity: 0.7;
+}
+
+/* 2. Dual Atmospheric Glowing Aura Orbs */
+.tps-leaders-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(50px);
+  will-change: transform, opacity;
+  animation: tpsOrbFloat 14s ease-in-out infinite alternate;
+}
+
+.tps-glow-blue {
+  top: 15%;
+  left: -80px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(50, 62, 221, 0.08) 0%, rgba(0, 210, 255, 0.03) 60%, transparent 80%);
+}
+
+.tps-glow-amber {
+  bottom: 10%;
+  right: -80px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 164, 27, 0.08) 0%, rgba(234, 88, 12, 0.03) 60%, transparent 80%);
+  animation-delay: -7s;
+}
+
+@keyframes tpsOrbFloat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(30px, 20px) scale(1.08); opacity: 1; }
+  100% { transform: translate(-20px, -25px) scale(0.95); opacity: 0.75; }
+}
+
+/* 3. Subtle Rotating Concentric Reticle Ring (Center Watermark) */
+.tps-leaders-reticle-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 720px;
+  height: 720px;
+  transform: translate(-50%, -50%);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.tps-leaders-reticle-svg {
+  width: 100%;
+  height: 100%;
+  animation: tpsReticleRotate 80s linear infinite;
+}
+
+@keyframes tpsReticleRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Header Content
+   -------------------------------------------------------------------------- */
+.tps-leaders-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.tps-leaders-subheading {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #323edd;
+  margin-bottom: 12px;
+}
+
+.tps-leaders-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: #090f35;
+  margin: 0 0 16px 0;
+}
+
+.tps-leaders-title span {
+  color: #323edd;
+  font-weight: 800;
+}
+
+.tps-leaders-subtitle {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: #64748b;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Frameless 2-Column Grid Layout (Zero boxes, completely frameless)
+   -------------------------------------------------------------------------- */
+.tps-frameless-steps-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
+  align-items: start;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Individual Frameless Step */
+.tps-frameless-step {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 26px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. The Vertical Indicator Line (Draws Downward First - Slow & Smooth)
+   -------------------------------------------------------------------------- */
+.tps-frameless-line-track {
+  position: relative;
+  width: 4px;
+  min-width: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tps-frameless-line-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Step 1 Line: Royal Blue */
+.tps-frameless-step.theme-mission .tps-frameless-line-bar {
+  background: linear-gradient(180deg, #2432c9 0%, #3b82f6 100%);
+  box-shadow: none;
+}
+
+/* Step 2 Line: Vibrant Amber Orange */
+.tps-frameless-step.theme-vision .tps-frameless-line-bar {
+  background: linear-gradient(180deg, #ea580c 0%, #f97316 100%);
+  box-shadow: none;
+}
+
+/* TRIGGER LINE DRAW (Runs Every Time You Scroll In) */
+.tps-frameless-step.is-revealed .tps-frameless-line-bar {
+  transform: scaleY(1);
+}
+
+/* Step 2 Line Stagger Delay */
+.tps-frameless-step[data-index="1"].is-revealed .tps-frameless-line-bar {
+  transition-delay: 0.4s;
+}
+
+/* Exit Reset: smooth snap back when scrolling out */
+.tps-frameless-step:not(.is-revealed) .tps-frameless-line-bar {
+  transform: scaleY(0);
+  transition: transform 0.5s ease;
+  transition-delay: 0s !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. The Written Content Next to the Line (Reveals Slowly After the Line)
+   -------------------------------------------------------------------------- */
+.tps-frameless-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 4px;
+  
+  /* Initial hidden state: shifted slightly left toward the line */
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: 
+    opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+/* Step 1 Content Delay (Runs after Step 1 Line starts drawing) */
+.tps-frameless-step[data-index="0"].is-revealed .tps-frameless-content {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.6s;
+}
+
+/* Step 2 Content Delay (Runs after Step 2 Line starts drawing) */
+.tps-frameless-step[data-index="1"].is-revealed .tps-frameless-content {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 1.0s;
+}
+
+/* Exit Reset: smooth fade out when scrolling out */
+.tps-frameless-step:not(.is-revealed) .tps-frameless-content {
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: 0s !important;
+}
+
+/* Number & Meta Header */
+.tps-frameless-top {
+  margin-bottom: 12px;
+}
+
+.tps-frameless-num {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.2px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tps-frameless-step.theme-mission .tps-frameless-num {
+  color: #323edd;
+}
+
+.tps-frameless-step.theme-vision .tps-frameless-num {
+  color: #ffa41b;
+}
+
+.tps-frameless-tag {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.tps-frameless-step.theme-mission .tps-frameless-tag {
+  color: #323edd;
+}
+
+.tps-frameless-step.theme-vision .tps-frameless-tag {
+  color: #ea580c;
+}
+
+.tps-frameless-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #0f172a;
+  margin: 0 0 14px 0;
+  line-height: 1.2;
+}
+
+/* Description Text */
+.tps-frameless-desc {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 22px;
+}
+
+/* Highlights List (Clean & Frameless) */
+.tps-frameless-highlights {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tps-frameless-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.tps-frameless-highlight-item i {
+  font-size: 16px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.tps-frameless-step.theme-mission .tps-frameless-highlight-item i {
+  color: #ffa41b;
+}
+
+.tps-frameless-step.theme-vision .tps-frameless-highlight-item i {
+  color: #323edd;
+}
+
+.tps-frameless-highlight-item strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-leaders-vision-section {
+    padding: 75px 0 85px;
+  }
+
+  .tps-leaders-title {
+    font-size: 32px;
+  }
+
+  .tps-frameless-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .tps-frameless-title {
+    font-size: 24px;
+  }
+
+  .tps-frameless-num {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-leaders-title {
+    font-size: 26px;
+  }
+
+  .tps-leaders-subtitle {
+    font-size: 14px;
+  }
+
+  .tps-frameless-step {
+    gap: 18px;
+  }
+
+  .tps-frameless-num {
+    font-size: 28px;
+  }
+
+  .tps-frameless-title {
+    font-size: 22px;
+  }
+
+  .tps-frameless-desc {
+    font-size: 14px;
+  }
+
+  .tps-frameless-highlight-item {
+    font-size: 13.5px;
+  }
+}

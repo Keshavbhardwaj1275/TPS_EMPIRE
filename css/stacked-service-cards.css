@@ -1,0 +1,454 @@
+/* ==========================================================================
+   TPS Empire - Scroll-Driven Sticky Split Services Showcase
+   Left: Sticky Heading (Visible throughout the scroll)
+   Right: Stacking Cards Deck
+   ========================================================================== */
+
+/* Section Outer Wrapper */
+.tps-scroll-stack-section {
+  position: relative;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+/* Scroll Track (provides the vertical scroll distance for card transitions) */
+.tps-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 320vh; /* 320vh scroll length for smooth card pacing */
+}
+
+/* Sticky Viewport Stage (pins in the viewport during scrolling) */
+.tps-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+  width: 100%;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  pointer-events: auto;
+}
+
+/* 2-Column Split Grid (Heading Left, Cards Right) */
+.tps-sticky-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 50px;
+  align-items: center;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Sticky Heading & Overview Box
+   -------------------------------------------------------------------------- */
+.tps-sticky-left-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 15px;
+}
+
+.tps-sticky-heading-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.tps-sticky-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #323edd;
+  margin-bottom: 16px;
+}
+
+.tps-sticky-main-title {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: #090f35;
+  margin-bottom: 18px;
+}
+
+.tps-sticky-main-title span {
+  color: #323edd;
+}
+
+.tps-sticky-subtitle {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: #555c6d;
+  margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Stacking Card Deck
+   -------------------------------------------------------------------------- */
+.tps-sticky-right-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tps-stack-deck-side {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: 500px;
+  overflow: hidden;
+}
+
+/* Individual Stack Card (Flat solid style, sharp straight edges, NO glow/shadow) */
+.tps-deck-card-wide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 440px;
+  border-radius: 0px !important;
+  padding: 34px 34px 28px;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  border: none !important;
+  filter: none !important;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Card Header Row */
+.tps-deck-card-wide .card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.tps-deck-card-wide .tps-deck-card-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.tps-deck-card-wide .card-tag {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 5px 12px;
+  border-radius: 0px !important;
+  background: rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+}
+
+/* Card Description */
+.tps-deck-card-wide .tps-deck-card-desc {
+  font-size: 16.5px;
+  line-height: 1.55;
+  margin: 0 0 20px 0;
+  font-weight: 400;
+  max-width: 95%;
+}
+
+/* Card Footer Row with Features & CTA Button */
+.tps-deck-card-wide .card-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.tps-deck-card-wide .card-features {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tps-deck-card-wide .card-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.tps-deck-card-wide .card-features i {
+  font-size: 14px;
+}
+
+/* Pill CTA Button (Flat, NO glow/shadow) */
+.tps-deck-card-wide .tps-deck-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #111111 !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 16px 9px 20px;
+  border-radius: 9999px;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  transition: transform 0.25s ease;
+  white-space: nowrap;
+}
+
+.tps-deck-card-wide .tps-deck-card-cta .cta-arrow {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #111111;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: transform 0.25s ease;
+}
+
+.tps-deck-card-wide:hover .tps-deck-card-cta .cta-arrow,
+.tps-deck-card-wide .tps-deck-card-cta:hover .cta-arrow {
+  transform: translateX(3px);
+}
+
+.tps-deck-card-wide .tps-deck-card-cta:hover {
+  transform: scale(1.02);
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Color Themes (Website Brand Royal Blue #323edd & Vibrant Orange #f96d00)
+   -------------------------------------------------------------------------- */
+
+/* Card 0: Primary Brand Royal Blue */
+.tps-deck-card-wide[data-index="0"] {
+  background: #323edd;
+  color: #ffffff;
+  z-index: 10;
+}
+.tps-deck-card-wide[data-index="0"] .tps-deck-card-title {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="0"] .card-tag {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="0"] .tps-deck-card-desc {
+  color: rgba(255, 255, 255, 0.95);
+}
+.tps-deck-card-wide[data-index="0"] .card-footer-row {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+.tps-deck-card-wide[data-index="0"] .card-features span {
+  color: rgba(255, 255, 255, 0.9);
+}
+.tps-deck-card-wide[data-index="0"] .card-features i {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="0"] .tps-deck-card-cta {
+  background: #ffffff;
+  color: #323edd !important;
+}
+.tps-deck-card-wide[data-index="0"] .tps-deck-card-cta .cta-arrow {
+  background: #323edd;
+  color: #ffffff;
+}
+
+/* Card 1: Authentic Website Brand Vibrant Orange */
+.tps-deck-card-wide[data-index="1"] {
+  background: #f96d00;
+  color: #ffffff;
+  z-index: 20;
+}
+.tps-deck-card-wide[data-index="1"] .tps-deck-card-title {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="1"] .card-tag {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="1"] .tps-deck-card-desc {
+  color: rgba(255, 255, 255, 0.95);
+}
+.tps-deck-card-wide[data-index="1"] .card-footer-row {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+.tps-deck-card-wide[data-index="1"] .card-features span {
+  color: rgba(255, 255, 255, 0.9);
+}
+.tps-deck-card-wide[data-index="1"] .card-features i {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="1"] .tps-deck-card-cta {
+  background: #ffffff;
+  color: #f96d00 !important;
+}
+.tps-deck-card-wide[data-index="1"] .tps-deck-card-cta .cta-arrow {
+  background: #f96d00;
+  color: #ffffff;
+}
+
+/* Card 2: Deep Brand Royal Blue */
+.tps-deck-card-wide[data-index="2"] {
+  background: #2733d8;
+  color: #ffffff;
+  z-index: 30;
+}
+.tps-deck-card-wide[data-index="2"] .tps-deck-card-title {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="2"] .card-tag {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="2"] .tps-deck-card-desc {
+  color: rgba(255, 255, 255, 0.95);
+}
+.tps-deck-card-wide[data-index="2"] .card-footer-row {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+.tps-deck-card-wide[data-index="2"] .card-features span {
+  color: rgba(255, 255, 255, 0.9);
+}
+.tps-deck-card-wide[data-index="2"] .card-features i {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="2"] .tps-deck-card-cta {
+  background: #ffffff;
+  color: #2733d8 !important;
+}
+.tps-deck-card-wide[data-index="2"] .tps-deck-card-cta .cta-arrow {
+  background: #2733d8;
+  color: #ffffff;
+}
+
+/* Card 3: Authentic Website Brand Vibrant Orange */
+.tps-deck-card-wide[data-index="3"] {
+  background: #f96d00;
+  color: #ffffff;
+  z-index: 40;
+}
+.tps-deck-card-wide[data-index="3"] .tps-deck-card-title {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="3"] .card-tag {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="3"] .tps-deck-card-desc {
+  color: rgba(255, 255, 255, 0.95);
+}
+.tps-deck-card-wide[data-index="3"] .card-footer-row {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+.tps-deck-card-wide[data-index="3"] .card-features span {
+  color: rgba(255, 255, 255, 0.9);
+}
+.tps-deck-card-wide[data-index="3"] .card-features i {
+  color: #ffffff;
+}
+.tps-deck-card-wide[data-index="3"] .tps-deck-card-cta {
+  background: #ffffff;
+  color: #f96d00 !important;
+}
+.tps-deck-card-wide[data-index="3"] .tps-deck-card-cta .cta-arrow {
+  background: #f96d00;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-sticky-viewport {
+    top: 90px;
+    height: auto;
+    min-height: 480px;
+  }
+
+  .tps-sticky-split-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .tps-sticky-left-col {
+    padding-right: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .tps-sticky-main-title {
+    font-size: 32px;
+  }
+
+  .tps-sticky-steps {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .tps-stack-deck-side {
+    height: 460px;
+  }
+
+  .tps-deck-card-wide {
+    height: 400px;
+    padding: 26px 24px 22px;
+  }
+
+  .tps-deck-card-wide .tps-deck-card-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tps-scroll-track {
+    height: 280vh;
+  }
+
+  .tps-sticky-viewport {
+    top: 70px;
+  }
+
+  .tps-sticky-main-title {
+    font-size: 26px;
+  }
+
+  .tps-stack-deck-side {
+    height: 440px;
+  }
+
+  .tps-deck-card-wide {
+    height: 380px;
+    padding: 22px 18px 18px;
+  }
+
+  .tps-deck-card-wide .tps-deck-card-title {
+    font-size: 22px;
+  }
+
+  .tps-deck-card-wide .card-features {
+    display: none;
+  }
+}

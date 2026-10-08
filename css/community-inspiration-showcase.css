@@ -1,0 +1,486 @@
+/* ==========================================================================
+   TPS Empire - "Our Community, Our Inspiration" Interactive Showcase
+   Mechanics:
+   1. Initial View: "Our Community" [Photo in Center] "Our Inspiration"
+   2. Scroll Transition: Photo slides smoothly below title, "Our Community" and "Our Inspiration" slide together side-by-side at top. (NO zoom in distortion).
+   3. Paragraph Cards: 4 cards appear sequentially one by one below the photo with strict non-overlapping vertical separation.
+   ========================================================================== */
+
+/* Main Section Runway */
+.tps-community-inspiration-section {
+  position: relative;
+  width: 100%;
+  background: #faf8f5;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  border-top: 1px solid #ede8de;
+  border-bottom: 1px solid #ede8de;
+  overflow: clip;
+}
+
+/* Extended Scroll Track for Pinned Runway */
+.tps-community-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 400vh;
+}
+
+/* Sticky Viewport pinned during scroll */
+.tps-community-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 680px;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #faf8f5;
+  box-sizing: border-box;
+  padding: 24px 20px;
+}
+
+/* Background Atmospheric Canvas */
+.tps-community-bg-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.tps-community-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(36, 50, 201, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(36, 50, 201, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.tps-community-ambient-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0) 70%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Center Stage Container
+   -------------------------------------------------------------------------- */
+.tps-community-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Header Container */
+.tps-community-header-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  z-index: 6;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Inline Heading: "Our Community" and "Our Inspiration" */
+.tps-community-inline-title {
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  color: #0f172a;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+}
+
+.tps-title-left {
+  display: inline-block;
+  color: #0f172a;
+  white-space: nowrap;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.tps-title-comma {
+  display: inline-block;
+  color: #0f172a;
+  opacity: 0;
+  white-space: nowrap;
+  margin-right: 4px;
+  margin-left: -6px;
+  transform: translateY(-2px);
+  will-change: opacity;
+}
+
+.tps-title-right {
+  display: inline-block;
+  color: #2432c9;
+  white-space: nowrap;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   Morphing Central Photo Showcase (No Zoom In Distortion)
+   -------------------------------------------------------------------------- */
+.tps-morph-photo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.tps-title-avatar-badge {
+  position: relative;
+  width: 380px;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tps-avatar-outer-glow {
+  position: absolute;
+  inset: -22px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.32) 0%, rgba(79, 70, 229, 0) 70%);
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.tps-avatar-outer-ring {
+  position: absolute;
+  inset: -11px;
+  border-radius: 32px;
+  background: #e0e7ff;
+  border: 3px solid rgba(99, 102, 241, 0.45);
+  z-index: 2;
+}
+
+.tps-avatar-inner-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 26px;
+  background: #c7d2fe;
+  z-index: 3;
+}
+
+.tps-avatar-img-frame {
+  position: relative;
+  width: 356px;
+  height: 206px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 16px 42px rgba(36, 50, 201, 0.28);
+  z-index: 4;
+}
+
+.tps-avatar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+/* Hand-drawn spiral knot node icon */
+.tps-spiral-knot-icon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 5;
+}
+
+.tps-spiral-knot-left {
+  top: -20px;
+  left: -28px;
+}
+
+.tps-spiral-knot-right {
+  bottom: -20px;
+  right: -28px;
+}
+
+/* --------------------------------------------------------------------------
+   4 Sequential Paragraph Cards Below the Photo (Generously Spaced & Disjoint)
+   -------------------------------------------------------------------------- */
+.tps-community-cards-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 82px);
+  width: 100%;
+  max-width: 1340px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 56px;
+  row-gap: 26px;
+  pointer-events: none;
+  z-index: 7;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+/* Base Dialog Card (Sharp Edges) */
+.tps-dialog-card {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 0 !important;
+  transform: translateY(24px) scale(0.97);
+  transition: 
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.45s ease;
+  will-change: transform, opacity;
+}
+
+/* Subtle outwards flare on entrance */
+.tps-dialog-card[data-card="1"],
+.tps-dialog-card[data-card="3"] {
+  transform: translateY(24px) translateX(-10px) scale(0.97);
+}
+
+.tps-dialog-card[data-card="2"],
+.tps-dialog-card[data-card="4"] {
+  transform: translateY(24px) translateX(10px) scale(0.97);
+}
+
+/* Active State when triggered by scroll */
+.tps-dialog-card.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+/* Sharp-Edged Card Body (0px Corners) */
+.tps-dialog-body-box {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0 !important;
+  padding: 16px 22px 18px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tps-dialog-body-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(36, 50, 201, 0.1);
+}
+
+/* Alternating Brand Accents on Left Edge */
+.tps-dialog-card[data-card="1"] .tps-dialog-body-box {
+  border-left: 4px solid #2432c9;
+}
+
+.tps-dialog-card[data-card="2"] .tps-dialog-body-box {
+  border-left: 4px solid #ea580c;
+}
+
+.tps-dialog-card[data-card="3"] .tps-dialog-body-box {
+  border-left: 4px solid #ea580c;
+}
+
+.tps-dialog-card[data-card="4"] .tps-dialog-body-box {
+  border-left: 4px solid #2432c9;
+}
+
+.tps-dialog-body-text {
+  font-size: 13px;
+  line-height: 1.62;
+  color: #334155;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 1299.98px) {
+  .tps-community-inline-title {
+    font-size: clamp(24px, 2.8vw, 38px);
+  }
+
+  .tps-title-avatar-badge {
+    width: 340px;
+    height: 205px;
+  }
+
+  .tps-avatar-img-frame {
+    width: 320px;
+    height: 185px;
+  }
+
+  .tps-community-cards-grid {
+    max-width: 1140px;
+    transform: translate(-50%, 75px);
+    column-gap: 40px;
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: 1099.98px) {
+  .tps-community-inline-title {
+    font-size: clamp(22px, 2.4vw, 32px);
+  }
+
+  .tps-title-avatar-badge {
+    width: 300px;
+    height: 180px;
+  }
+
+  .tps-avatar-img-frame {
+    width: 282px;
+    height: 162px;
+  }
+
+  .tps-community-cards-grid {
+    max-width: 980px;
+    transform: translate(-50%, 65px);
+    column-gap: 32px;
+    row-gap: 18px;
+  }
+
+  .tps-dialog-body-text {
+    font-size: 11.8px;
+    line-height: 1.48;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .tps-community-scroll-track {
+    height: auto;
+  }
+
+  .tps-community-sticky-viewport {
+    position: static;
+    height: auto;
+    max-height: none;
+    padding: 70px 20px 80px;
+    overflow: visible;
+  }
+
+  .tps-community-stage {
+    position: static;
+    height: auto;
+  }
+
+  .tps-community-header-wrap {
+    position: static !important;
+    transform: none !important;
+    margin-bottom: 24px;
+  }
+
+  .tps-community-inline-title {
+    font-size: 32px;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .tps-title-left,
+  .tps-title-right {
+    transform: none !important;
+  }
+
+  .tps-title-comma {
+    opacity: 1 !important;
+  }
+
+  .tps-morph-photo-container {
+    position: static !important;
+    transform: none !important;
+    margin: 0 auto 36px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tps-title-avatar-badge {
+    width: 340px;
+    height: 215px;
+    max-width: 90vw;
+  }
+
+  .tps-avatar-img-frame {
+    width: 320px;
+    height: 195px;
+    max-width: 85vw;
+  }
+
+  .tps-community-cards-grid {
+    position: static !important;
+    transform: none !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .tps-dialog-card {
+    position: static !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-community-inline-title {
+    font-size: 26px;
+  }
+
+  .tps-title-avatar-badge {
+    width: 290px;
+    height: 185px;
+    max-width: 88vw;
+  }
+
+  .tps-avatar-img-frame {
+    width: 272px;
+    height: 167px;
+    max-width: 83vw;
+  }
+}

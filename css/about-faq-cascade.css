@@ -1,0 +1,585 @@
+/* ==========================================================================
+   TPS Empire - FAQ Scroll-Driven Reveal with Synchronized Lines
+   Layout:
+   - Left Column: "Quick Help", "Frequently Asked Questions", Subtitle & "Got more questions? [Contact us →]"
+   - Right Column: Hanging Question Cards where each card and its connector lines appear simultaneously upon scroll
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FLUID MULTI-LAYER WAVE SECTION TRANSITION (Home Page Only)
+   -------------------------------------------------------------------------- */
+.tps-wave-section-transition {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  margin-top: -160px;
+  margin-bottom: -2px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.tps-wave-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+.tps-wave-layer-1 {
+  z-index: 1;
+  opacity: 0.98;
+}
+
+.tps-wave-layer-2 {
+  z-index: 2;
+  opacity: 0.98;
+}
+
+.tps-wave-layer-3 {
+  z-index: 3;
+}
+
+/* --------------------------------------------------------------------------
+   FLUID MULTI-LAYER WAVE SECTION TRANSITION OVER FOOTER
+   -------------------------------------------------------------------------- */
+.tps-wave-footer-transition {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  margin-top: 0;
+  margin-bottom: -2px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.tps-wave-footer-transition + .ftco-footer {
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+@media (max-width: 991.98px) {
+  .tps-wave-footer-transition {
+    height: 90px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tps-wave-footer-transition {
+    height: 70px;
+    margin-top: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FAQ Section Canvas with Dropping & Reveal Effect
+   -------------------------------------------------------------------------- */
+.tps-faq-cascade-section {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  padding: 100px 0 120px;
+  background: #fdfcf9;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  overflow: visible;
+}
+
+/* When preceded by wave transition (Home page), remove top border so it flows seamlessly */
+.tps-wave-section-transition + .tps-faq-cascade-section,
+#home-faq-section {
+  border-top: none;
+  padding-top: 30px;
+  padding-bottom: 70px;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+.tps-faq-cascade-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+/* 2-Column Split Layout (Left: Header & CTA, Right: Hanging Questions Stack) */
+.tps-faq-split-grid {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT COLUMN: Header Block & Contact Us CTA
+   -------------------------------------------------------------------------- */
+.tps-faq-left-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+@media (min-width: 992px) {
+  .tps-faq-left-col {
+    position: sticky;
+    top: 130px;
+    align-self: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   STACKED TOP HEADER (Home Page - Header Directly Above Questions)
+   -------------------------------------------------------------------------- */
+.tps-faq-stacked-layout .tps-faq-cascade-container {
+  max-width: 880px;
+}
+
+.tps-faq-header-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.tps-faq-cascade-section.is-revealed .tps-faq-header-top {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tps-faq-header-top .tps-faq-heading {
+  font-size: clamp(26px, 2.5vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  margin: 0 0 12px 0;
+}
+
+.tps-faq-stacked-layout .tps-faq-contact-btn {
+  padding: 10px 22px;
+  font-size: 13.5px;
+}
+
+.tps-faq-cards-stack-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 36px;
+}
+
+.tps-faq-stacked-layout .tps-faq-cards-stack {
+  gap: 11px;
+}
+
+.tps-faq-stacked-layout .tps-faq-num-tab {
+  width: 58px;
+  min-width: 58px;
+  font-size: 14.5px;
+}
+
+.tps-faq-stacked-layout .tps-faq-card-content {
+  padding: 13px 18px;
+}
+
+.tps-faq-stacked-layout .tps-faq-q-title {
+  font-size: 14.5px;
+}
+
+.tps-faq-stacked-layout .tps-faq-a-text {
+  font-size: 13px;
+}
+
+.tps-faq-stacked-layout .tps-faq-card[data-index="0"] .tps-wire {
+  top: -36px;
+  height: 36px;
+}
+
+.tps-faq-stacked-layout .tps-wire.left {
+  left: 28px;
+}
+
+.tps-faq-stacked-layout .tps-wire.right {
+  right: 28px;
+}
+
+.tps-faq-cascade-section.is-revealed .tps-faq-left-col {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tps-faq-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #2432c9;
+  margin-bottom: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-faq-heading {
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  color: #0f172a;
+  margin: 0 0 18px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#home-faq-section .tps-faq-heading {
+  margin-bottom: 28px;
+}
+
+.tps-faq-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0 0 32px 0;
+  max-width: 440px;
+}
+
+/* Contact Us Button Wrap */
+.tps-faq-cta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tps-faq-more-hint {
+  font-size: 14px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.tps-faq-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #2432c9;
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 13px 30px;
+  border-radius: 0;
+  text-decoration: none !important;
+  box-shadow: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-faq-contact-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+.tps-faq-contact-btn i {
+  transition: transform 0.25s ease;
+}
+
+.tps-faq-contact-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT COLUMN: Question Cards Stack with Hanging Cable Lines
+   -------------------------------------------------------------------------- */
+.tps-faq-right-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 42px;
+}
+
+/* Cards Stack Container */
+.tps-faq-cards-stack {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: transparent;
+  z-index: 2;
+}
+
+/* Individual FAQ Row Card - Hanging from Cables (Strictly Scroll-Driven) */
+.tps-faq-card {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0;
+  display: flex;
+  align-items: stretch;
+  overflow: visible;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(-30px) scale(0.97);
+  transition: 
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.15),
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+/* Card becomes visible strictly when scrolled into view */
+.tps-faq-card.is-card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   SYNCHRONIZED HANGING WIRE LINES (Appear with each card)
+   -------------------------------------------------------------------------- */
+.tps-card-hanging-wires {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tps-wire {
+  position: absolute;
+  width: 2px;
+  background: #cbd5e1;
+  transform-origin: top;
+  transform: scaleY(0);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+.tps-wire.left {
+  left: 36px;
+}
+
+.tps-wire.right {
+  right: 36px;
+}
+
+/* First Card (01) top hanging wires reaching from anchor ceiling */
+.tps-faq-card[data-index="0"] .tps-wire {
+  top: -42px;
+  height: 42px;
+}
+
+/* Anchor dot nodes on the top wires of Card 01 */
+.tps-faq-card[data-index="0"] .tps-wire::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #64748b;
+  border: 1.5px solid #ffffff;
+  box-sizing: border-box;
+}
+
+/* Subsequent Cards (02 to 05) connector wires spanning the 14px gap */
+.tps-faq-card:not([data-index="0"]) .tps-wire {
+  top: -14px;
+  height: 14px;
+}
+
+/* When card is visible, wires appear and expand downwards with the card */
+.tps-faq-card.is-card-visible .tps-wire {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+/* Hover & Active Selected State */
+.tps-faq-card:hover,
+.tps-faq-card.is-open {
+  border-color: #2432c9;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(36, 50, 201, 0.09);
+  transform: translateY(-2px);
+}
+
+.tps-faq-card.theme-orange:hover,
+.tps-faq-card.theme-orange.is-open {
+  border-color: #ea580c;
+  box-shadow: 0 10px 28px rgba(234, 88, 12, 0.09);
+  transform: translateY(-2px);
+}
+
+/* Number Badge Tab on Left of Each Card (01., 02., 03.) */
+.tps-faq-num-tab {
+  width: 72px;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border-right: 1.5px solid #e2e8f0;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #475569;
+  transition: background 0.25s ease, color 0.25s ease, border-right-color 0.25s ease;
+  user-select: none;
+}
+
+/* Theme Blue Number Tab */
+.tps-faq-card.theme-blue .tps-faq-num-tab {
+  background: #eef2ff;
+  color: #2432c9;
+  border-right-color: #dbeafe;
+}
+
+/* Theme Orange Number Tab */
+.tps-faq-card.theme-orange .tps-faq-num-tab {
+  background: #fff7ed;
+  color: #ea580c;
+  border-right-color: #ffedd5;
+}
+
+/* Question Content Area */
+.tps-faq-card-content {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.tps-faq-q-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #0f172a;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tps-faq-toggle-icon {
+  font-size: 12px;
+  color: #94a3b8;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+}
+
+.tps-faq-card:hover .tps-faq-toggle-icon {
+  color: #2432c9;
+  transform: rotate(180deg);
+}
+
+.tps-faq-card.theme-orange:hover .tps-faq-toggle-icon {
+  color: #ea580c;
+  transform: rotate(180deg);
+}
+
+.tps-faq-card.is-open .tps-faq-toggle-icon {
+  transform: rotate(180deg);
+  color: #2432c9;
+}
+
+.tps-faq-card.theme-orange.is-open .tps-faq-toggle-icon {
+  color: #ea580c;
+  transform: rotate(180deg);
+}
+
+/* Expandable Answer Drawer */
+.tps-faq-a-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease, margin-top 0.25s ease;
+  margin-top: 0;
+}
+
+.tps-faq-card.is-open .tps-faq-a-drawer,
+.tps-faq-card:hover .tps-faq-a-drawer {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 8px;
+}
+
+.tps-faq-a-text {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-faq-cascade-section {
+    padding: 70px 0 80px;
+  }
+
+  .tps-faq-split-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .tps-faq-left-col {
+    padding-right: 0;
+    text-align: center;
+    position: static;
+  }
+
+  .tps-faq-subtitle {
+    margin: 0 auto 24px auto;
+  }
+
+  .tps-faq-cta-wrap {
+    justify-content: center;
+  }
+
+  .tps-wire {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .tps-faq-heading {
+    font-size: 28px;
+  }
+
+  .tps-faq-num-tab {
+    width: 54px;
+    min-width: 54px;
+    font-size: 14px;
+  }
+
+  .tps-faq-q-title {
+    font-size: 14px;
+  }
+
+  .tps-faq-a-text {
+    font-size: 13px;
+  }
+}

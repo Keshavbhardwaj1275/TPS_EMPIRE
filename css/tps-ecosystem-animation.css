@@ -1,0 +1,679 @@
+/* ==========================================================================
+   TPS EMPIRE - FULL-WIDTH PANORAMIC ECOSYSTEM ANIMATION
+   Clean 3D white isometric platform + edge-to-edge circuit highway
+   ========================================================================== */
+
+:root {
+  --tps-primary: #2432c9;
+  --tps-primary-light: #323edd;
+  --tps-accent: #ea580c;
+  --tps-accent-light: #f97316;
+  --tps-cyan: #0284c7;
+  --tps-emerald: #10b981;
+  --tps-purple: #7c3aed;
+  --tps-rose: #e11d48;
+  --tps-bg-light: #f8fafc;
+  --tps-card-bg: #ffffff;
+  --tps-border: #e2e8f0;
+  --tps-text-main: #0f172a;
+  --tps-text-muted: #64748b;
+  --tps-radius-lg: 0px;
+  --tps-radius-md: 0px;
+  --tps-radius-full: 9999px;
+  --tps-shadow-sm: none;
+  --tps-shadow-md: none;
+  --tps-shadow-lg: none;
+  --tps-shadow-hub-3d: none;
+}
+
+/* --------------------------------------------------------------------------
+   Section Container & Ambient Background (Pure Minimalist White)
+   -------------------------------------------------------------------------- */
+.tps-ecosystem-section {
+  position: relative;
+  background: #ffffff;
+  padding: 85px 0 95px;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Crisp Clean Matrix Grid on Pure White */
+.tps-ecosystem-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   FULL-WIDTH PANORAMIC STAGE CONTAINER (Spans entire horizontal viewport)
+   -------------------------------------------------------------------------- */
+.tps-fullwidth-stage-wrapper {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tps-ecosystem-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 480px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+@media (max-width: 1200px) {
+  .tps-ecosystem-stage {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tps-ecosystem-stage {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tps-ecosystem-stage {
+    min-height: 390px;
+  }
+}
+
+/* SVG Circuit Board Layer - Crisp Solid Lines Without Glow */
+.tps-circuit-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.tps-track-base {
+  stroke: #e2e8f0;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.tps-track-pulse {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  opacity: 1;
+  filter: none !important;
+}
+
+/* Blue Tracks (Alternating) */
+.tps-track-pulse.blue,
+.tps-track-pulse.cyan {
+  stroke: #2432c9;
+  stroke-width: 3;
+  stroke-dasharray: 60 260;
+  animation: flowPulse 5s linear infinite;
+}
+
+/* Orange Tracks (Alternating) */
+.tps-track-pulse.orange,
+.tps-track-pulse.gold {
+  stroke: #ea580c;
+  stroke-width: 3;
+  stroke-dasharray: 60 260;
+  animation: flowPulse 5s linear infinite;
+}
+
+/* Downward Lines to the Two Cards (Same Animated Pulse Stream) */
+.tps-track-pulse.downward {
+  stroke-width: 3.2;
+  stroke-dasharray: 60 240;
+  animation: flowDownward 3.6s linear infinite;
+  filter: none !important;
+}
+
+.tps-track-pulse.downward.blue {
+  stroke: #2432c9;
+}
+
+.tps-track-pulse.downward.orange {
+  stroke: #ea580c;
+}
+
+@keyframes flowPulse {
+  0% { stroke-dashoffset: 640; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes flowDownward {
+  0% { stroke-dashoffset: 600; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   CLEAN CIRCULAR SOLID FLAT HUB (No Gloss, No 3D Bevels, No Radar Rings)
+   -------------------------------------------------------------------------- */
+.tps-hub-wrapper {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tps-hub-radar {
+  display: none !important;
+}
+
+/* Circular Clean Flat Solid Hub Plate */
+.tps-hub-plate {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  border-radius: 50% !important;
+  background: #ffffff;
+  box-shadow: none !important;
+  border: 3px solid #2432c9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.tps-hub-wrapper:hover .tps-hub-plate {
+  transform: translateY(-4px) scale(1.03);
+  border-color: #ea580c;
+  box-shadow: none !important;
+}
+
+/* Circular Clean Flat Logo Stage */
+.tps-hub-logo-container {
+  width: 130px;
+  height: 130px;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.tps-hub-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: none !important;
+  transition: transform 0.3s ease;
+}
+
+.tps-hub-wrapper:hover .tps-hub-logo-img {
+  transform: scale(1.06);
+}
+
+/* --------------------------------------------------------------------------
+   SATELLITE TECH NODES (Clean Flat Solid Discs)
+   -------------------------------------------------------------------------- */
+.tps-moving-node {
+  position: absolute;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  user-select: none;
+  transition: opacity 0.3s ease;
+  will-change: transform, left, top;
+}
+
+/* Moving Circle Disc (Solid Flat, No Gloss/Shadow) */
+.tps-moving-disc {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 0 !important;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tps-primary);
+  font-size: 19px;
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.tps-moving-node:hover .tps-moving-disc,
+.tps-moving-node.is-active .tps-moving-disc {
+  transform: translateY(-3px) scale(1.08);
+  border-color: currentColor;
+  box-shadow: none !important;
+}
+
+/* Color Coding per Feature Category */
+.tps-moving-node[data-theme="code"] { color: #2432c9; }
+.tps-moving-node[data-theme="security"] { color: #ea580c; }
+.tps-moving-node[data-theme="cloud"] { color: #2432c9; }
+.tps-moving-node[data-theme="ai"] { color: #2432c9; }
+.tps-moving-node[data-theme="mobile"] { color: #ea580c; }
+.tps-moving-node[data-theme="data"] { color: #ea580c; }
+.tps-moving-node[data-theme="erp"] { color: #2432c9; }
+.tps-moving-node[data-theme="infra"] { color: #ea580c; }
+
+.tps-moving-disc i, 
+.tps-moving-disc svg {
+  transition: transform 0.25s ease;
+}
+
+.tps-moving-node:hover .tps-moving-disc i,
+.tps-moving-node:hover .tps-moving-disc svg {
+  transform: scale(1.1);
+}
+
+/* Floating Label Tooltip (Clean Flat) */
+.tps-moving-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px) scale(0.9);
+  margin-top: 6px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 0;
+  box-shadow: none !important;
+  border: 1px solid #334155;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 25;
+}
+
+.tps-moving-node:hover .tps-moving-label,
+.tps-moving-node.is-active .tps-moving-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(6px) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   THE TWO CORE CARDS (ENTERPRISE SOLUTIONS & PROFESSIONAL TRAINING)
+   Crisp Flat Geometric Cards - Zero Gloss, Zero Shine
+   -------------------------------------------------------------------------- */
+.tps-dual-cards-row {
+  position: relative;
+  z-index: 15;
+  margin-top: 10px;
+}
+
+.tps-power-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 0 !important;
+  border: 2px solid #e2e8f0;
+  border-top: 5px solid #2432c9;
+  box-shadow: none !important;
+  padding: 38px 34px 34px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  overflow: visible;
+}
+
+.tps-power-card.training-card {
+  border-top-color: #ea580c;
+}
+
+.tps-power-card:hover {
+  transform: translateY(-4px);
+  box-shadow: none !important;
+  border-color: #cbd5e1;
+  border-top-color: #2432c9;
+}
+
+.tps-power-card.training-card:hover {
+  border-top-color: #ea580c;
+}
+
+/* Top Docking Receiver Port Hidden */
+.tps-card-dock-port {
+  display: none !important;
+}
+
+/* Card Header Area */
+.tps-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+
+.tps-card-icon-box {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border-radius: 0 !important;
+  background: #2432c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 22px;
+  box-shadow: none !important;
+  transition: transform 0.25s ease;
+}
+
+.tps-power-card:hover .tps-card-icon-box {
+  transform: translateY(-2px);
+}
+
+.tps-power-card.training-card .tps-card-icon-box {
+  background: #ea580c;
+  box-shadow: none !important;
+}
+
+.tps-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.tps-card-subtitle {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #2432c9;
+  margin: 0;
+}
+
+.tps-power-card.training-card .tps-card-subtitle {
+  color: #ea580c;
+}
+
+/* Clean Flat Pill Tag */
+.tps-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 0 !important;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: #f0f3ff;
+  color: #2432c9;
+  border: 1px solid #dce4fd;
+  margin-bottom: 20px;
+}
+
+.tps-power-card.training-card .tps-card-tag {
+  background: #fff8eb;
+  color: #ea580c;
+  border-color: #fed7aa;
+}
+
+/* Card Body Text */
+.tps-card-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #475569;
+  margin-bottom: 22px;
+}
+
+/* Feature Checklist */
+.tps-card-features {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tps-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.5;
+  transition: transform 0.2s ease;
+}
+
+.tps-feature-item:hover {
+  transform: translateX(3px);
+}
+
+.tps-feature-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 0;
+  background: rgba(36, 50, 201, 0.1);
+  color: #2432c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.tps-power-card.training-card .tps-feature-icon {
+  background: rgba(234, 88, 12, 0.12);
+  color: #ea580c;
+}
+
+/* Card Footer Action */
+.tps-card-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px dashed #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tps-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2432c9;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.tps-power-card.training-card .tps-card-link {
+  color: #ea580c;
+}
+
+.tps-card-link:hover {
+  gap: 12px;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.tps-power-card.training-card .tps-card-link:hover {
+  color: #0f172a;
+}
+
+.tps-card-stat {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 4px 10px;
+  border-radius: 0;
+  border: 1px solid #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   CTA Global Bar (Clean Flat Solid Button)
+   -------------------------------------------------------------------------- */
+.tps-cta-action-row {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 15;
+}
+
+.tps-btn-ecosystem-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 36px;
+  border-radius: 0 !important;
+  background: #2432c9;
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: none !important;
+  text-decoration: none;
+  border: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.tps-btn-ecosystem-cta:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: none !important;
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.tps-btn-ecosystem-cta i {
+  transition: transform 0.25s ease;
+}
+
+.tps-btn-ecosystem-cta:hover i {
+  transform: translateX(4px);
+}
+
+.tps-btn-ecosystem-cta i {
+  transition: transform 0.3s ease;
+}
+
+.tps-btn-ecosystem-cta:hover i {
+  transform: translateX(5px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .tps-ecosystem-section {
+    padding: 60px 0 70px;
+  }
+
+  .tps-hub-plate {
+    width: 180px;
+    height: 180px;
+    border-radius: 40px;
+  }
+
+  .tps-hub-logo-container {
+    width: 115px;
+    height: 115px;
+  }
+
+  .tps-hub-radar {
+    width: 220px;
+    height: 220px;
+  }
+
+  .tps-moving-disc {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .tps-moving-label {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tps-hub-plate {
+    width: 150px;
+    height: 150px;
+    border-radius: 32px;
+  }
+
+  .tps-hub-logo-container {
+    width: 95px;
+    height: 95px;
+  }
+
+  .tps-hub-radar {
+    width: 180px;
+    height: 180px;
+  }
+
+  .tps-moving-disc {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .tps-moving-label {
+    font-size: 10px;
+    padding: 2px 7px;
+  }
+
+  .tps-track-badge {
+    display: none;
+  }
+
+  .tps-power-card {
+    padding: 32px 24px 28px;
+  }
+
+  .tps-card-title {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,303 @@
+/* ==========================================================================
+   TPS Empire - Scroll-Pinned "Our Exclusive IT Solution Services"
+   Left: 100% Static / Locked Heading | Right: Scroll-Driven Moving Cards Stream
+   Transparent / Clean Light Theme | Sharp Rectangular Cards
+   ========================================================================== */
+
+/* Main Section Track (Provides scroll depth runway for card streaming) */
+.tps-exclusive-services-section {
+  position: relative;
+  width: 100%;
+  height: 320vh;
+  background-color: #fff6ee;
+  background-image: 
+    linear-gradient(to right, rgba(234, 88, 12, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 88, 12, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: #1a1a2e;
+  margin: 0;
+  padding: 0;
+  z-index: 15;
+}
+
+/* Sticky Viewport (Pins in place while scrolling through the track) */
+.tps-exclusive-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff6ee;
+  background-image: 
+    linear-gradient(to right, rgba(234, 88, 12, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 88, 12, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  box-sizing: border-box;
+}
+
+/* Container */
+.tps-exclusive-container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  max-height: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: 100% Completely Static Heading
+   -------------------------------------------------------------------------- */
+.tps-exclusive-static-col {
+  flex: 0 0 38%;
+  max-width: 38%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+
+.tps-exclusive-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.tps-exclusive-title span {
+  color: #323edd;
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Viewport Window & Scroll-Driven Cards Stream
+   -------------------------------------------------------------------------- */
+.tps-exclusive-cards-col {
+  flex: 0 0 58%;
+  max-width: 58%;
+  height: 100%;
+  max-height: 720px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Top & bottom subtle fade masks */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+/* The moving cards rail driven by scroll */
+.tps-exclusive-cards-rail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Wide Sharp Rectangular Card */
+.tps-stream-card {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 0px !important; /* Sharp corners */
+  padding: 24px 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.tps-stream-card:hover {
+  transform: translateY(-2px);
+  border-color: #323edd;
+  box-shadow: 0 14px 32px rgba(50, 62, 221, 0.12);
+}
+
+/* Horizontal Content Flex */
+.tps-rect-card-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Modern Icon Emblem */
+.tps-rect-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  background: rgba(50, 62, 221, 0.08);
+  border: 1px solid rgba(50, 62, 221, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #323edd;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.tps-stream-card:hover .tps-rect-icon {
+  background: #323edd;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Rect Body */
+.tps-rect-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.tps-rect-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.tps-rect-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffa41b;
+}
+
+.tps-rect-num {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.tps-rect-title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #1a1a2e;
+  margin: 0 0 6px 0;
+}
+
+.tps-rect-text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Corner Bracket Line Accents */
+.tps-card-corner-lines::before,
+.tps-card-corner-lines::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.tps-card-corner-lines::before {
+  top: 0;
+  right: 0;
+  border-top: 2px solid #ffa41b;
+  border-right: 2px solid #ffa41b;
+}
+
+.tps-card-corner-lines::after {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid #ffa41b;
+  border-left: 2px solid #ffa41b;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-exclusive-services-section {
+    height: auto;
+    padding: 70px 0 80px;
+  }
+
+  .tps-exclusive-sticky-viewport {
+    position: static;
+    height: auto;
+  }
+
+  .tps-exclusive-container {
+    flex-direction: column;
+    gap: 36px;
+    height: auto;
+    max-height: none;
+  }
+
+  .tps-exclusive-static-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .tps-exclusive-title {
+    font-size: 32px;
+  }
+
+  .tps-exclusive-cards-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    overflow: visible;
+  }
+
+  .tps-exclusive-cards-rail {
+    transform: none !important;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-exclusive-title {
+    font-size: 26px;
+  }
+
+  .tps-stream-card {
+    padding: 18px 20px;
+  }
+
+  .tps-rect-card-content {
+    gap: 14px;
+  }
+
+  .tps-rect-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+  }
+
+  .tps-rect-title {
+    font-size: 18px;
+  }
+
+  .tps-rect-text {
+    font-size: 12.5px;
+  }
+}

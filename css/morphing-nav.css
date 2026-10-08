@@ -1,0 +1,602 @@
+/* ==========================================================================
+   TPS Empire - Global Scroll-Triggered Morphing Navbar & Right-Side Slide-Over Menu
+   Brand Theme Colors: Royal Blue (#323edd), Cyber Cyan (#00d2ff), Amber (#ffa41b), Midnight Navy (#090f35)
+   ========================================================================== */
+
+:root {
+  --tps-primary: #323edd;
+  --tps-primary-hover: #2531ca;
+  --tps-secondary: #00d2ff;
+  --tps-accent: #ffa41b;
+  --tps-cyan: #00d2ff;
+  --tps-dark-navy: #090f35;
+  --tps-dark-surface: #0d1434;
+  --tps-dark-base: #050818;
+  --tps-text-head: #ffffff;
+  --tps-text-body: #d1d9e6;
+  --tps-text-muted: #8896ab;
+  --tps-radius-pill: 9999px;
+  --tps-transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Top Navbar Smooth Scroll Morphing Transition
+   -------------------------------------------------------------------------- */
+.wrap {
+  position: relative;
+  z-index: 1051 !important;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+#ftco-navbar,
+.ftco_navbar {
+  position: absolute !important;
+  top: 40px !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1050 !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.35s ease !important;
+  will-change: transform, opacity;
+}
+
+/* Navbar container styling on desktop */
+@media (min-width: 992px) {
+  #ftco-navbar .container,
+  .ftco_navbar .container {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 32px rgba(9, 15, 53, 0.09) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Clearance for pages without top hero banner */
+  .page-top-clearance,
+  #ftco-navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
+  #ftco-navbar + .ftco-section:not(.tps-split-showcase-section),
+  .ftco_navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
+  .ftco_navbar + .ftco-section:not(.tps-split-showcase-section) {
+    padding-top: 170px !important;
+  }
+
+  .tps-hero-transition-section,
+  #tpsHeroTransitionSection,
+  .tps-split-showcase-section,
+  #tpsSplitShowcaseSection,
+  .contact-scroll-stage-track,
+  #contactScrollStageTrack,
+  .tps-blog-stream-section,
+  #tpsBlogStreamSection {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .page-top-clearance,
+  #ftco-navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
+  #ftco-navbar + .ftco-section:not(.tps-split-showcase-section),
+  .ftco_navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
+  .ftco_navbar + .ftco-section:not(.tps-split-showcase-section) {
+    padding-top: 45px !important;
+  }
+
+  .tps-hero-transition-section,
+  #tpsHeroTransitionSection,
+  .tps-split-showcase-section,
+  #tpsSplitShowcaseSection,
+  .contact-scroll-stage-track,
+  #contactScrollStageTrack,
+  .tps-blog-stream-section,
+  #tpsBlogStreamSection {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* When Scrolled: Shift Full Navbar to the Right and Fade Out */
+body.navbar-scrolled #ftco-navbar,
+body.navbar-scrolled .ftco_navbar {
+  transform: translateX(40px) translateY(-30px) scale(0.96) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Top bar contact wrap fade out */
+body.navbar-scrolled .wrap {
+  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: transform 0.35s ease, opacity 0.35s ease !important;
+}
+
+.wrap {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Universal Strict 1:1 Aspect Ratio Protection for Brand Logo
+   -------------------------------------------------------------------------- */
+.brand-logo,
+.navbar-brand .brand-logo,
+.tps-floating-corner-logo .brand-logo,
+.tps-offcanvas-brand .brand-logo,
+.tps-offcanvas-brand img,
+.faq-offcanvas-brand .brand-logo,
+.faq-offcanvas-brand img {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+/* --------------------------------------------------------------------------
+   Floating Top-Left Round Logo (Appears when Header is No Longer Visible)
+   -------------------------------------------------------------------------- */
+.tps-floating-corner-logo {
+  position: fixed;
+  top: 26px;
+  left: 28px;
+  z-index: 99998;
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(9, 15, 53, 0.12) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-20px) scale(0.8);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  flex-shrink: 0 !important;
+}
+
+.tps-floating-corner-logo .brand-logo {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  transition: transform 0.25s ease;
+}
+
+.tps-floating-corner-logo:hover {
+  background: #ffffff !important;
+  transform: scale(1.06) !important;
+  box-shadow: 0 6px 22px rgba(50, 62, 221, 0.25) !important;
+}
+
+.tps-floating-corner-logo:hover .brand-logo {
+  transform: scale(1.08);
+}
+
+/* Reveal Floating Top-Left Logo when Header is Scrolled Out of View */
+body.navbar-scrolled .tps-floating-corner-logo {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Hide Floating Top-Left Logo when Footer is reached */
+body.footer-in-view .tps-floating-corner-logo {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-20px) scale(0.8) !important;
+}
+
+/* Footer Brand Logo Styling */
+.ftco-footer .ftco-footer-logo img,
+.ftco-footer .footer-logo {
+  display: inline-block !important;
+  height: 40px !important;
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  object-fit: contain !important;
+  margin-right: 10px !important;
+  vertical-align: middle !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767.98px) {
+  .tps-floating-corner-logo {
+    top: 18px;
+    left: 18px;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+  }
+
+  .tps-floating-corner-logo .brand-logo {
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    min-height: 26px !important;
+    max-width: 26px !important;
+    max-height: 26px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Floating Circular Hamburger Menu Button (Blue Theme Matching About Page)
+   -------------------------------------------------------------------------- */
+.tps-floating-hamburger-btn,
+.faq-floating-hamburger-btn {
+  position: fixed;
+  top: 26px;
+  right: 28px;
+  z-index: 99998;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #323edd !important;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(-20px) scale(0.8);
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When Scrolled: Reveal Floating Hamburger Button */
+body.navbar-scrolled .tps-floating-hamburger-btn,
+body.navbar-scrolled .faq-floating-hamburger-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.tps-floating-hamburger-btn:hover,
+.faq-floating-hamburger-btn:hover {
+  transform: scale(1.06);
+  background: #2531ca !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22) !important;
+  border: none;
+}
+
+/* 3 Animated Hamburger Bars */
+.tps-hamburger-lines,
+.faq-hamburger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 22px;
+  height: 15px;
+  position: relative;
+}
+
+.tps-hamburger-lines .line,
+.faq-hamburger-lines .line {
+  display: block;
+  width: 100%;
+  height: 2.2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+/* Morph to X when menu is active/open */
+.tps-floating-hamburger-btn.active .tps-hamburger-lines .line-1,
+.faq-floating-hamburger-btn.active .faq-hamburger-lines .line-1 {
+  transform: translateY(6.4px) rotate(45deg);
+}
+
+.tps-floating-hamburger-btn.active .tps-hamburger-lines .line-2,
+.faq-floating-hamburger-btn.active .faq-hamburger-lines .line-2 {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.tps-floating-hamburger-btn.active .tps-hamburger-lines .line-3,
+.faq-floating-hamburger-btn.active .faq-hamburger-lines .line-3 {
+  transform: translateY(-6.4px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Right-Side Slide-Over Off-Canvas Menu Drawer (Video Reference Match)
+   -------------------------------------------------------------------------- */
+.tps-offcanvas-drawer,
+.faq-offcanvas-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.5s ease;
+}
+
+.tps-offcanvas-drawer.open,
+.faq-offcanvas-drawer.open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Dark Frosted Glass Backdrop Overlay */
+.tps-offcanvas-backdrop,
+.faq-offcanvas-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 28, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-offcanvas-drawer.open .tps-offcanvas-backdrop,
+.faq-offcanvas-drawer.open .faq-offcanvas-backdrop {
+  opacity: 1;
+}
+
+/* Slide-Over Side Panel (Architectural Off-White Matte) */
+.tps-offcanvas-panel,
+.faq-offcanvas-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  background: #ececec;
+  color: #111111;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.25);
+  padding: 44px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(100%);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.tps-offcanvas-drawer.open .tps-offcanvas-panel,
+.faq-offcanvas-drawer.open .faq-offcanvas-panel {
+  transform: translateX(0);
+}
+
+/* Top Header Bar with Brand & Close Button */
+.tps-offcanvas-top-bar,
+.faq-offcanvas-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  margin-bottom: 10px;
+}
+
+.tps-offcanvas-brand,
+.faq-offcanvas-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none !important;
+  color: #111111 !important;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-family: 'Syne', 'Montserrat', -apple-system, sans-serif;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.tps-offcanvas-brand:hover,
+.faq-offcanvas-brand:hover {
+  opacity: 0.85;
+  transform: translateX(2px);
+}
+
+.tps-offcanvas-brand .brand-logo,
+.faq-offcanvas-brand .brand-logo {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  border-radius: 50% !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+}
+
+.tps-offcanvas-brand .brand-text span,
+.faq-offcanvas-brand .brand-text span {
+  color: #323edd;
+}
+
+.tps-offcanvas-close,
+.faq-offcanvas-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+.tps-offcanvas-close:hover,
+.faq-offcanvas-close:hover {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Main Editorial Navigation Links */
+.tps-offcanvas-nav,
+.faq-offcanvas-nav {
+  margin: 20px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tps-offcanvas-links,
+.faq-offcanvas-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tps-offcanvas-links li,
+.faq-offcanvas-links li {
+  transform: translateY(32px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-offcanvas-drawer.open .tps-offcanvas-links li,
+.faq-offcanvas-drawer.open .faq-offcanvas-links li {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger Entrance Timing */
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(1),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(1) { transition-delay: 0.12s; }
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(2),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(2) { transition-delay: 0.17s; }
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(3),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(3) { transition-delay: 0.22s; }
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(4),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(4) { transition-delay: 0.27s; }
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(5),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(5) { transition-delay: 0.32s; }
+.tps-offcanvas-drawer.open .tps-offcanvas-links li:nth-child(6),
+.faq-offcanvas-drawer.open .faq-offcanvas-links li:nth-child(6) { transition-delay: 0.37s; }
+
+/* Large Editorial Links Styling */
+.tps-nav-link,
+.faq-nav-link {
+  display: inline-flex;
+  align-items: center;
+  color: #111111 !important;
+  text-decoration: none !important;
+  font-size: clamp(34px, 4vw, 46px);
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  font-family: 'Syne', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  width: fit-content;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* Focus-Mode Sibling Dimming on Hover */
+.tps-offcanvas-links:hover .tps-nav-link,
+.faq-offcanvas-links:hover .faq-nav-link {
+  opacity: 0.28;
+  color: #777777 !important;
+}
+
+.tps-offcanvas-links .tps-nav-link:hover,
+.faq-offcanvas-links .faq-nav-link:hover {
+  opacity: 1 !important;
+  color: #000000 !important;
+  transform: translateX(8px);
+}
+
+.tps-nav-link.active,
+.faq-nav-link.active {
+  color: #111111 !important;
+}
+
+.tps-nav-link.active::after,
+.faq-nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 3px;
+  background: #323edd;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .tps-floating-hamburger-btn,
+  .faq-floating-hamburger-btn {
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .tps-offcanvas-panel,
+  .faq-offcanvas-panel {
+    max-width: 100%;
+    padding: 30px 24px 26px;
+  }
+
+  .tps-nav-link,
+  .faq-nav-link {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+}

@@ -1,0 +1,499 @@
+/* ==========================================================================
+   TPS Empire - Hero Preview Cards -> Focal Centerpiece Zoom-Out & Emergence
+   Square Cards in Radial Arc Curve around Image | Click-to-Highlight Brackets
+   ========================================================================== */
+
+/* Main Sequence Track Wrapper */
+.tps-hero-emergence-section {
+  position: relative;
+  width: 100%;
+  background-color: #fff6ee;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  overflow: clip;
+}
+
+/* Scroll Scrub Track */
+.tps-hero-emergence-track {
+  position: relative;
+  width: 100%;
+  height: 420vh;
+}
+
+/* Sticky Viewport (Locks into view during entire sequence) */
+.tps-hero-emergence-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff6ee;
+}
+
+/* Central Stage Container */
+.tps-hero-emergence-container {
+  width: 100%;
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Phase 1: Curved Preview Cards Row (Square Cards Arched Around Below Image)
+   -------------------------------------------------------------------------- */
+.tps-hero-preview-row {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: 100%;
+  max-width: 960px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Square Preview Card */
+.tps-hero-preview-card {
+  position: absolute;
+  width: 205px;
+  height: 205px;
+  background: #323edd;
+  color: #ffffff;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0px !important; /* Sharp square corners */
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: visible;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Arc Curve Positions Around the Below Image with generous spacing */
+.tps-hero-preview-card[data-preview-index="0"] {
+  left: calc(50% - 390px);
+  top: 55px;
+  transform: rotate(-12deg);
+  background: #323edd;
+}
+
+.tps-hero-preview-card[data-preview-index="1"] {
+  left: calc(50% - 102px);
+  top: 0px;
+  transform: rotate(0deg);
+  background: #2430d7;
+}
+
+.tps-hero-preview-card[data-preview-index="2"] {
+  left: calc(50% + 185px);
+  top: 55px;
+  transform: rotate(12deg);
+  background: #222ece;
+}
+
+.tps-hero-preview-card:hover {
+  background: #1e29be;
+  box-shadow: 0 20px 42px rgba(50, 62, 221, 0.25);
+}
+
+/* Corner Bracket Lines (Top-Right & Bottom-Left) */
+.tps-preview-line {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Horizontal corner ticks */
+.tps-preview-line::before,
+.tps-preview-line::after {
+  position: absolute;
+  content: '';
+  width: 10px;
+  height: 4px;
+  background: #ffffff;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+
+.tps-preview-line::before {
+  top: 0;
+  right: 0;
+}
+
+.tps-preview-line::after {
+  bottom: 0;
+  left: 0;
+}
+
+/* Vertical corner ticks */
+.tps-hero-preview-card::before,
+.tps-hero-preview-card::after {
+  position: absolute;
+  content: '';
+  width: 4px;
+  height: 10px;
+  background: #ffffff;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+
+.tps-hero-preview-card::before {
+  top: 0;
+  right: 0;
+}
+
+.tps-hero-preview-card::after {
+  bottom: 0;
+  left: 0;
+}
+
+/* Signature Amber/Orange Corner Highlights: ONLY when clicked (.active-highlight) */
+.tps-hero-preview-card.active-highlight::before,
+.tps-hero-preview-card.active-highlight::after {
+  height: 28px;
+  background: #ffa41b;
+}
+
+.tps-hero-preview-card.active-highlight .tps-preview-line::before,
+.tps-hero-preview-card.active-highlight .tps-preview-line::after {
+  width: 28px;
+  background: #ffa41b;
+}
+
+.tps-preview-icon {
+  font-size: 40px;
+  color: #ffffff;
+  margin-bottom: 14px;
+  line-height: 1;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.tps-hero-preview-card.active-highlight .tps-preview-icon {
+  color: #ffa41b;
+}
+
+.tps-preview-title {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Section Header Row (Revealed smoothly during emergence phase)
+   -------------------------------------------------------------------------- */
+.tps-emergence-header {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 16px;
+  text-align: center;
+  z-index: 25;
+  opacity: 0;
+  transform: translate3d(0, -20px, 0);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.tps-emergence-title {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.tps-emergence-title span {
+  color: #323edd;
+  font-weight: 800;
+}
+
+.tps-emergence-subtitle {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Phase 2 & 3: Main Emergence Stage (Focal Guy Center, Flank Cards Left/Right)
+   -------------------------------------------------------------------------- */
+.tps-emergence-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centerpiece Focal Image (Guy Holding Laptop / Workstation) */
+.tps-focal-centerpiece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1);
+  width: 280px;
+  max-width: 80%;
+  z-index: 20;
+  text-align: center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.08));
+}
+
+.tps-guy-img {
+  max-width: 100%;
+  height: auto;
+  max-height: 330px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/* Left and Right Emergent Cards */
+.tps-emergent-card {
+  position: absolute;
+  top: 50%;
+  width: 290px;
+  max-width: 82%;
+  z-index: 15;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.tps-emergent-card.left-card {
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale3d(0.45, 0.45, 1);
+}
+
+.tps-emergent-card.right-card {
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale3d(0.45, 0.45, 1);
+}
+
+/* Emergent Card Content Box */
+.tps-service-box {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+  padding: 28px 22px;
+  border-radius: 4px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.tps-service-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(50, 62, 221, 0.12);
+  border-color: rgba(50, 62, 221, 0.3);
+}
+
+.tps-service-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(50, 62, 221, 0.08);
+  border-radius: 50%;
+  color: #323edd;
+  font-size: 26px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.tps-service-box:hover .tps-service-icon {
+  background: #323edd;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.tps-service-body h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+}
+
+.tps-service-body p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-hero-emergence-track {
+    height: 360vh;
+  }
+
+  .tps-hero-preview-row {
+    top: 3%;
+    height: 250px;
+  }
+
+  .tps-hero-preview-card {
+    width: 170px;
+    height: 170px;
+    padding: 16px 12px;
+  }
+
+  .tps-hero-preview-card[data-preview-index="0"] {
+    left: calc(50% - 300px);
+    top: 40px;
+    transform: rotate(-9deg);
+  }
+
+  .tps-hero-preview-card[data-preview-index="1"] {
+    left: calc(50% - 85px);
+    top: 0px;
+  }
+
+  .tps-hero-preview-card[data-preview-index="2"] {
+    left: calc(50% + 130px);
+    top: 40px;
+    transform: rotate(9deg);
+  }
+
+  .tps-preview-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .tps-preview-title {
+    font-size: 13px;
+  }
+
+  .tps-emergence-title {
+    font-size: 24px;
+  }
+
+  .tps-emergence-stage {
+    height: 320px;
+  }
+
+  .tps-focal-centerpiece {
+    width: 230px;
+  }
+
+  .tps-emergent-card {
+    width: 240px;
+  }
+
+  .tps-service-box {
+    padding: 20px 16px;
+  }
+
+  .tps-service-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .tps-service-body h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .tps-service-body p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-hero-emergence-track {
+    height: 300vh;
+  }
+
+  .tps-hero-preview-row {
+    top: 2%;
+    height: 200px;
+  }
+
+  .tps-hero-preview-card {
+    width: 125px;
+    height: 125px;
+    padding: 10px 6px;
+  }
+
+  .tps-hero-preview-card[data-preview-index="0"] {
+    left: calc(50% - 195px);
+    top: 25px;
+    transform: rotate(-6deg);
+  }
+
+  .tps-hero-preview-card[data-preview-index="1"] {
+    left: calc(50% - 62px);
+    top: 0px;
+  }
+
+  .tps-hero-preview-card[data-preview-index="2"] {
+    left: calc(50% + 70px);
+    top: 25px;
+    transform: rotate(6deg);
+  }
+
+  .tps-preview-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .tps-preview-title {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .tps-emergence-header {
+    margin-bottom: 8px;
+  }
+
+  .tps-emergence-title {
+    font-size: 18px;
+  }
+
+  .tps-emergence-subtitle {
+    display: none;
+  }
+
+  .tps-emergence-stage {
+    height: 280px;
+  }
+
+  .tps-focal-centerpiece {
+    width: 170px;
+  }
+
+  .tps-emergent-card {
+    width: 210px;
+  }
+}

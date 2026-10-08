@@ -1,0 +1,399 @@
+/* ==========================================================================
+   TPS EMPIRE - VERTICAL SCROLL-DRIVEN SERVICES SHOWCASE
+   Replicating the luxury editorial sticky center-transition aesthetic
+   ========================================================================== */
+
+:root {
+  --serv-bg: #f9f7f4;
+  --serv-card-bg: #ffffff;
+  --serv-text-main: #1c1917;
+  --serv-text-muted: #57534e;
+  --serv-text-light: #8b8580;
+  --serv-border: #e7e5e4;
+  --serv-radius-lg: 16px;
+  --serv-radius-pill: 9999px;
+  --serv-primary-blue: #323edd;
+  --serv-primary-blue-dark: #2531c4;
+}
+
+/* Section Wrapper (No overflow:hidden so sticky works seamlessly across all browsers) */
+.tps-services-editorial-section {
+  position: relative;
+  background-color: var(--serv-bg);
+  padding: 110px 0 130px;
+}
+
+/* Clean solid background without dots or pattern */
+.tps-services-editorial-section::before {
+  display: none;
+}
+
+/* Section Header */
+.tps-services-header {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 70px;
+}
+
+.tps-services-subheading {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--serv-primary-blue);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tps-services-main-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--serv-text-main);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.tps-services-main-title span {
+  color: var(--serv-primary-blue);
+}
+
+/* --------------------------------------------------------------------------
+   3-Column Sticky Scroll Architecture
+   Left: Step & Title | Center: Sticky Flat Pastel Card | Right: Content
+   -------------------------------------------------------------------------- */
+.tps-scroll-story-container {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* The 3-Column Layout Grid */
+.tps-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px 1.1fr;
+  gap: 36px;
+  align-items: start;
+  position: relative;
+}
+
+@media (max-width: 1199px) {
+  .tps-story-grid {
+    grid-template-columns: 1fr 270px 1fr;
+    gap: 24px;
+  }
+}
+
+/* Left & Right Scrolling Columns */
+.tps-story-column-left,
+.tps-story-column-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Story Step Items */
+.tps-story-step-item {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0.22;
+  transform: translateY(20px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-story-step-item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left Column Content */
+.tps-step-num {
+  font-family: "Georgia", "Playfair Display", serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--serv-text-light);
+  margin-bottom: 14px;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+.tps-step-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--serv-text-main);
+  text-transform: uppercase;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+/* Right Column Content */
+.tps-step-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--serv-text-muted);
+  margin-bottom: 20px;
+}
+
+.tps-step-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tps-step-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--serv-text-main);
+}
+
+.tps-step-feature i {
+  color: var(--serv-primary-blue);
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   Center Column: Sticky Flat Pastel Card Stage
+   -------------------------------------------------------------------------- */
+.tps-story-column-center {
+  position: sticky;
+  top: calc(50vh - 195px);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  pointer-events: none;
+}
+
+/* Flat Pastel Card Container Frame (Matt Paper Board with smooth parallax lag) */
+.tps-pastel-card-frame {
+  position: relative;
+  width: 100%;
+  max-width: 270px;
+  height: 380px;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 20px 45px rgba(28, 25, 23, 0.1), 0 4px 10px rgba(28, 25, 23, 0.04);
+  border: 1px solid #e7e5e4;
+  overflow: hidden;
+  box-sizing: border-box;
+  pointer-events: auto;
+  transition: transform 0.15s ease-out;
+}
+
+/* Flat Inner Artwork Layers (Move smoothly with scroll) */
+.tps-pastel-artwork-slide {
+  position: absolute;
+  inset: 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 16px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(30px) scale(0.94);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tps-pastel-artwork-slide.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.tps-pastel-artwork-slide.is-passed {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.94);
+}
+
+/* Brand Alternating Blue & Orange Card Backgrounds (Standard Flat, 0 Gloss/Shine) */
+.tps-pastel-slide-1 { background-color: #323edd; color: #ffffff; } /* Brand Royal Blue */
+.tps-pastel-slide-2 { background-color: #f96d00; color: #ffffff; } /* Brand Vibrant Orange */
+.tps-pastel-slide-3 { background-color: #2733d8; color: #ffffff; } /* Deep Royal Blue */
+.tps-pastel-slide-4 { background-color: #ea580c; color: #ffffff; } /* Sunset Orange */
+.tps-pastel-slide-5 { background-color: #1e28ba; color: #ffffff; } /* Midnight Royal Blue */
+.tps-pastel-slide-6 { background-color: #f35a00; color: #ffffff; } /* Flame Orange */
+
+/* Flat Matte Emblem (No gloss/shine) */
+.tps-flat-logo-emblem {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.tps-flat-logo-emblem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Pure flat crisp white contrast */
+  opacity: 0.95;
+}
+
+/* Service Graphic Icon */
+.tps-flat-service-icon {
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+/* Card Badge Title */
+.tps-flat-card-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.tps-flat-card-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.14);
+  padding: 3px 10px;
+  border-radius: var(--serv-radius-pill);
+}
+
+/* Floating "Send a Request" Action Button in Royal Blue */
+.tps-floating-request-bubble {
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: var(--serv-primary-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 14px;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(50, 62, 221, 0.4);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.65) translateY(24px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: none;
+}
+
+.tps-floating-request-bubble.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.tps-floating-request-bubble:hover {
+  transform: scale(1.08) translateY(-4px);
+  background: var(--serv-primary-blue-dark);
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 18px 38px rgba(50, 62, 221, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Tablet Responsive Layout (<992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .tps-services-editorial-section {
+    padding: 60px 0 80px;
+  }
+
+  .tps-services-main-title {
+    font-size: 32px;
+  }
+
+  /* Switch from 3-column sticky to clean vertical card stack */
+  .tps-story-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .tps-story-column-center {
+    display: none; /* In mobile, each card has its own embedded flat artwork */
+  }
+
+  .tps-story-column-left,
+  .tps-story-column-right {
+    display: none;
+  }
+
+  /* Mobile Stacked Cards */
+  .tps-mobile-story-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .tps-mobile-story-card {
+    background: #ffffff;
+    border-radius: var(--serv-radius-lg);
+    border: 1px solid var(--serv-border);
+    padding: 30px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .tps-mobile-card-artwork {
+    width: 100%;
+    height: 175px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 16px;
+    color: #ffffff;
+  }
+
+  .tps-mobile-card-artwork .tps-flat-logo-emblem {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 10px;
+  }
+
+  .tps-mobile-step-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--serv-text-main);
+  }
+
+  .tps-floating-request-bubble {
+    width: 85px;
+    height: 85px;
+    font-size: 11px;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+  }
+}

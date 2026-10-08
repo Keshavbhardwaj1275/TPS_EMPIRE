@@ -1,0 +1,11 @@
+# robots.txt for TPS Empire (https://tpsempire.co.in)
+User-agent: *
+Allow: /
+Disallow: /prepros-6.config
+Disallow: /scratch_duplicates.json
+Disallow: /readme.txt
+Disallow: /scss/
+
+# Host and Sitemap
+Host: https://tpsempire.co.in
+Sitemap: https://tpsempire.co.in/sitemap.xml

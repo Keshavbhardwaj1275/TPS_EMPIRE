@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <!-- Homepage -->
+    <url>
+        <loc>https://tpsempire.co.in/</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.00</priority>
+    </url>
+    <!-- Services -->
+    <url>
+        <loc>https://tpsempire.co.in/services.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <!-- About Us -->
+    <url>
+        <loc>https://tpsempire.co.in/about.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- Single Project Details -->
+    <url>
+        <loc>https://tpsempire.co.in/project.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <!-- Blog Index -->
+    <url>
+        <loc>https://tpsempire.co.in/blog.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- Featured Blog Post -->
+    <url>
+        <loc>https://tpsempire.co.in/blog-single.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <!-- Contact Page -->
+    <url>
+        <loc>https://tpsempire.co.in/contact.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- FAQ Page -->
+    <url>
+        <loc>https://tpsempire.co.in/faq.html</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://tpsempire.co.in/legal/</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://tpsempire.co.in/legal/privacy-policy</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.40</priority>
+    </url>
+    <url>
+        <loc>https://tpsempire.co.in/legal/terms-and-conditions</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.40</priority>
+    </url>
+    <url>
+        <loc>https://tpsempire.co.in/legal/cookie-policy</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.40</priority>
+    </url>
+    <url>
+        <loc>https://tpsempire.co.in/legal/disclaimer</loc>
+        <lastmod>2026-09-29</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.40</priority>
+    </url>
+</urlset>

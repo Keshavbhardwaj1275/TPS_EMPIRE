@@ -1,0 +1,240 @@
+/* ==========================================================================
+   TPS Empire - Dynamic Scroll Background Color Morphing Engine (Services Page)
+   Alternating Sequence: Section 1 (Light) -> Section 2 (Dark) -> Section 3 (Light) -> Footer (Dark)
+   ========================================================================== */
+
+/* Page Base & Transition Canvas */
+body.services-page {
+  background-color: #f0f3f8;
+  color: #1e293b;
+  transition: 
+    background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: background-color;
+}
+
+/* Background canvas layer for ultra-smooth GPU color morphing */
+.tps-bg-morph-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #f0f3f8;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: background-color;
+}
+
+/* --------------------------------------------------------------------------
+   Section Specific Transparent Backgrounds to Allow Canvas Morph Through
+   -------------------------------------------------------------------------- */
+.tps-scroll-stack-section,
+.tps-services-editorial-section {
+  background-color: transparent !important;
+  transition: 
+    color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   THEME 1: LIGHT THEME (Luminous Luxury Slate #f0f3f8)
+   Section 1: Our Exclusive IT Solution Services (Stacking Cards)
+   -------------------------------------------------------------------------- */
+body.services-page.theme-light .tps-bg-morph-canvas {
+  background-color: #f0f3f8;
+}
+
+body.services-page.theme-light .tps-sticky-main-title {
+  color: #0f172a !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.services-page.theme-light .tps-sticky-main-title span {
+  color: #323edd !important;
+}
+
+body.services-page.theme-light .tps-sticky-subtitle {
+  color: #475569 !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.services-page.theme-light .tps-sticky-badge {
+  color: #323edd !important;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 2: DARK THEME (Brand Midnight Navy #09101d)
+   Section 2: Our Best Services (3-Column Editorial Sticky Showcase)
+   -------------------------------------------------------------------------- */
+body.services-page.theme-dark .tps-bg-morph-canvas {
+  background-color: #09101d;
+}
+
+/* Editorial Header in Dark Mode */
+body.services-page.theme-dark .tps-services-main-title {
+  color: #ffffff !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.services-page.theme-dark .tps-services-main-title span {
+  color: #323edd !important;
+}
+
+body.services-page.theme-dark .tps-services-header p {
+  color: #94a3b8 !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.services-page.theme-dark .tps-services-subheading {
+  color: #4b58f8 !important;
+}
+
+/* Story Left Steps in Dark Mode */
+body.services-page.theme-dark .tps-story-step-item .tps-step-num {
+  color: #64748b;
+  transition: color 0.4s ease;
+}
+
+body.services-page.theme-dark .tps-story-step-item .tps-step-title {
+  color: #64748b;
+  transition: color 0.4s ease;
+}
+
+body.services-page.theme-dark .tps-story-step-item.is-active .tps-step-num {
+  color: #323edd !important;
+}
+
+body.services-page.theme-dark .tps-story-step-item.is-active .tps-step-title {
+  color: #ffffff !important;
+}
+
+/* Story Right Details in Dark Mode */
+body.services-page.theme-dark .tps-story-step-item .tps-step-desc {
+  color: #cbd5e1 !important;
+  transition: color 0.4s ease;
+}
+
+body.services-page.theme-dark .tps-step-feature {
+  color: #e2e8f0 !important;
+}
+
+body.services-page.theme-dark .tps-step-feature i {
+  color: #323edd !important;
+}
+
+/* Mobile Story Cards in Dark Mode */
+body.services-page.theme-dark .tps-mobile-story-card {
+  background: #111a2e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.services-page.theme-dark .tps-mobile-step-title {
+  color: #ffffff !important;
+}
+
+body.services-page.theme-dark .tps-mobile-story-card .tps-step-desc {
+  color: #94a3b8 !important;
+}
+
+body.services-page.theme-dark .tps-mobile-story-card .tps-step-feature {
+  color: #cbd5e1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 3: LIGHT THEME (#f8fafc / #f0f3f8)
+   Section 3: Consult Us Here in TPS Empire (Flying Counters)
+   -------------------------------------------------------------------------- */
+.tps-flying-sheet-layer {
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  box-shadow: 0 -35px 90px rgba(0, 0, 0, 0.12) !important;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.tps-flying-title {
+  color: #0f172a !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-flying-title span {
+  color: #323edd !important;
+}
+
+.tps-flying-subtitle {
+  color: #475569 !important;
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-flying-badge {
+  background: #eef2ff !important;
+  border: 1px solid #dbeafe !important;
+  color: #323edd !important;
+}
+
+/* Light Crisp Flying Counter Cards */
+.tps-flying-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.07), 0 4px 6px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+.tps-flying-card:hover {
+  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.14) !important;
+}
+
+.tps-flying-number {
+  color: #0f172a !important;
+}
+
+.tps-flying-label {
+  color: #64748b !important;
+}
+
+.tps-flying-card.theme-blue {
+  border-left: 4px solid #323edd !important;
+}
+
+.tps-flying-card.theme-blue .tps-flying-icon-box {
+  background: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #323edd !important;
+}
+
+.tps-flying-card.theme-blue .tps-flying-plus {
+  color: #323edd !important;
+}
+
+.tps-flying-card.theme-orange {
+  border-left: 4px solid #ffa41b !important;
+}
+
+.tps-flying-card.theme-orange .tps-flying-icon-box {
+  background: #fff7ed !important;
+  border-color: #fed7aa !important;
+  color: #ea580c !important;
+}
+
+.tps-flying-card.theme-orange .tps-flying-plus {
+  color: #ea580c !important;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 4: MIDNIGHT FOOTER (#070c18)
+   -------------------------------------------------------------------------- */
+body.services-page.theme-midnight .tps-bg-morph-canvas {
+  background-color: #070c18;
+}
+
+/* Floating "Send a Request" Action Bubble */
+.tps-floating-request-bubble {
+  box-shadow: 0 8px 24px rgba(50, 62, 221, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.tps-floating-request-bubble:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 12px 30px rgba(50, 62, 221, 0.6) !important;
+}

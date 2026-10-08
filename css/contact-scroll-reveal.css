@@ -1,0 +1,295 @@
+/* ==========================================================================
+   TPS Empire - Contact Hero Scroll Stage & Sequential Icon Reveal
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Scroll Stage Track (Pinned Sticky Container)
+   -------------------------------------------------------------------------- */
+.contact-scroll-stage-track {
+  position: relative;
+  width: 100%;
+  height: 220vh;
+  background-color: #fff6ee;
+  background-image: 
+    linear-gradient(to right, rgba(234, 88, 12, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 88, 12, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  box-sizing: border-box;
+}
+
+.contact-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 60px 20px 40px;
+  background-color: #fff6ee;
+  background-image: 
+    linear-gradient(to right, rgba(234, 88, 12, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 88, 12, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.contact-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Intro Header (Initially Dead Center)
+   -------------------------------------------------------------------------- */
+.contact-hero-intro {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  will-change: transform, opacity;
+  transform: translateY(95px);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-hero-title {
+  font-size: clamp(38px, 5.2vw, 62px);
+  font-weight: 900;
+  line-height: 1.12;
+  color: #0d122b;
+  margin-bottom: 14px;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.contact-hero-title span {
+  color: #323edd;
+}
+
+.contact-hero-subtitle {
+  font-size: clamp(15.5px, 1.8vw, 19px);
+  line-height: 1.6;
+  color: #556075;
+  margin: 0 auto;
+  max-width: 620px;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Icons Row (Revealed sequentially on scroll - No Card Box)
+   -------------------------------------------------------------------------- */
+.contact-cards-track {
+  width: 100%;
+  margin-top: 36px;
+  opacity: 0;
+  transform: translateY(40px);
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.contact-cards-track.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.contact-card-item {
+  position: relative;
+  margin-bottom: 15px;
+  will-change: transform, opacity;
+}
+
+/* Zero Card Container - Pure Icon & Text */
+.contact-card-item .dbox {
+  padding: 0 10px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  text-align: center;
+  transition: none !important;
+}
+
+.contact-card-item .dbox:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Icon Initial Unrevealed State (Matching Reference Image)
+   -------------------------------------------------------------------------- */
+.contact-card-item .dbox .icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #323edd !important;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(40px) scale(0.3) rotate(-25deg);
+  filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(50, 62, 221, 0.25);
+  transition: 
+    transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s ease,
+    box-shadow 0.35s ease;
+  will-change: transform, opacity, filter;
+  cursor: pointer;
+}
+
+.contact-card-item .dbox .icon span {
+  font-size: 30px;
+  color: #ffffff;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-card-item .dbox .text {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: 
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  will-change: transform, opacity;
+  width: 100%;
+}
+
+.contact-card-item .dbox p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #666666;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+.contact-card-item .dbox p span {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #111111;
+  display: inline;
+  margin-right: 3px;
+}
+
+.contact-card-item .dbox p a {
+  color: #323edd;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.contact-card-item .dbox p a:hover {
+  color: #1a25a0;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Icon Revealed State (Triggered sequentially on scroll)
+   -------------------------------------------------------------------------- */
+.contact-card-item.is-visible .dbox .icon {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+  filter: blur(0px);
+}
+
+.contact-card-item.is-visible .dbox .text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-card-item.is-visible .dbox .icon:hover {
+  transform: translateY(-4px) scale(1.08) rotate(4deg);
+  box-shadow: 0 8px 22px rgba(50, 62, 221, 0.38);
+}
+
+.contact-card-item.is-visible .dbox .icon:hover span {
+  transform: scale(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   Contact Form Section Below
+   -------------------------------------------------------------------------- */
+.contact-form-section {
+  position: relative;
+  z-index: 10;
+  background-color: #fff6ee !important;
+  padding: 80px 0;
+  border-top: 1px solid rgba(234, 88, 12, 0.1);
+}
+
+.contact-form-section .wrapper {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.contact-form-section .contact-wrap {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.contact-form-section #map {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .contact-scroll-stage-track {
+    height: 240vh;
+  }
+
+  .contact-hero-intro {
+    transform: translateY(60px);
+  }
+
+  .contact-card-item .dbox .icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 14px;
+  }
+
+  .contact-card-item .dbox .icon span {
+    font-size: 24px;
+  }
+
+  .contact-card-item .dbox p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .contact-card-item .dbox .icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 10px;
+  }
+
+  .contact-card-item .dbox .icon span {
+    font-size: 20px;
+  }
+
+  .contact-card-item .dbox p {
+    font-size: 12px;
+  }
+}

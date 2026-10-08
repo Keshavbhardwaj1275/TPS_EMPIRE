@@ -1,0 +1,554 @@
+/* ==========================================================================
+   TPS Empire - Split Scroll-Driven Showcase ("Empowering Businesses & Careers")
+   Unboxed Floating Graphic + Clean Unboxed Text Content
+   1. Initial Section Entry: Heading & Unboxed Graphic appear FIRST in the CENTER
+   2. As user scrolls down: Graphic smoothly glides to the LEFT, and Content 1 animates in on the RIGHT (NO BOX)
+   3. On continued scrolling: Content 1 moves up/out and Content 2 animates in with a staggered vertical sequence
+   4. Exact color transitions (Electric Blue <---> Sunset Amber/Orange)
+   5. Clean, unboxed typography (no container card boxes, borders, or shadows)
+   ========================================================================== */
+
+/* Main Section Wrapper */
+.tps-split-showcase-section {
+  position: relative;
+  width: 100%;
+  background: #f8faff;
+  padding: 0 !important;
+  margin: 0;
+  z-index: 1;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s ease;
+  overflow: clip;
+}
+
+/* Phase 2 Background Color Shift */
+.tps-split-showcase-section.mode-training {
+  background: #fffaf4;
+  border-bottom-color: #fed7aa;
+}
+
+/* Extended Scroll Track (Runway for smooth scroll scrub) */
+.tps-split-showcase-track {
+  position: relative;
+  width: 100%;
+  height: 280vh;
+}
+
+/* Sticky Viewport (Pinned in screen, positioned with clearance below floating navbar) */
+.tps-split-showcase-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 520px;
+  max-height: 100vh;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 120px 0 10px;
+}
+
+/* Inner Container */
+.tps-split-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-height: calc(100vh - 120px);
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   Top Heading Row (Appears First Above Center Graphic)
+   -------------------------------------------------------------------------- */
+.tps-split-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.tps-split-title {
+  font-size: clamp(26px, 2.2vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.tps-split-title span {
+  color: #323edd;
+  transition: color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-split-showcase-section.mode-training .tps-split-title span {
+  color: #ea580c;
+}
+
+.tps-split-subtitle {
+  font-size: 14px;
+  line-height: 1.45;
+  color: #64748b;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   2-Column Split Stage
+   -------------------------------------------------------------------------- */
+.tps-split-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Unboxed Floating Graphic (Starts CENTER, Slides LEFT on Scroll)
+   -------------------------------------------------------------------------- */
+.tps-split-image-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  
+  /* Smooth gliding animation from center to left */
+  transform: translateX(0);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Phase 0 (Intro State): Picture sits dead center of the stage */
+.tps-split-showcase-section.phase-intro .tps-split-image-col {
+  transform: translateX(calc(50% + 20px));
+}
+
+/* Clean Unboxed Image Wrapper (Free-floating, no box or border) */
+.tps-split-image-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: min(310px, 42vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Floating Status Pill Toggle Switch */
+.tps-split-status-pill {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-split-status-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+}
+
+.tps-pill-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  opacity: 0.75;
+  letter-spacing: 1.1px;
+}
+
+/* Pill Toggle Switch Track & Knob */
+.tps-toggle-track {
+  position: relative;
+  width: 30px;
+  height: 16px;
+  background: #cbd5e1;
+  border-radius: 9999px;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.tps-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tps-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Mode 1 Status: Enterprise Active */
+.tps-split-showcase-section.mode-enterprise .tps-split-status-pill {
+  background: #ffffff;
+  border-color: #c7d2fe;
+  color: #323edd;
+}
+
+.tps-split-showcase-section.mode-enterprise .tps-toggle-track {
+  background: #323edd;
+}
+
+.tps-split-showcase-section.mode-enterprise .tps-toggle-knob {
+  transform: translateX(14px);
+}
+
+.tps-split-showcase-section.mode-enterprise .tps-status-dot {
+  background: #323edd;
+}
+
+/* Mode 2 Status: Professional Training Active */
+.tps-split-showcase-section.mode-training .tps-split-status-pill {
+  background: #ffffff;
+  border-color: #fed7aa;
+  color: #ea580c;
+}
+
+.tps-split-showcase-section.mode-training .tps-toggle-track {
+  background: #ea580c;
+}
+
+.tps-split-showcase-section.mode-training .tps-toggle-knob {
+  transform: translateX(14px);
+}
+
+.tps-split-showcase-section.mode-training .tps-status-dot {
+  background: #ffa41b;
+}
+
+/* Center Image (Unconfined / Free-floating) */
+.tps-split-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tps-split-img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(290px, 39vh);
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.tps-split-showcase-section.mode-training .tps-split-img {
+  filter: hue-rotate(25deg) saturate(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Unboxed Content (NO BOX, Clean Typography)
+   -------------------------------------------------------------------------- */
+.tps-split-cards-col {
+  position: relative;
+  width: 100%;
+  height: min(320px, 44vh);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* In Phase 0, right content is hidden while picture is centered */
+.tps-split-showcase-section.phase-intro .tps-split-cards-col {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tps-split-cards-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Unboxed Content Block (NO CARD BOX, NO BORDER, NO BACKGROUND) */
+.tps-split-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 10px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  /* Initial hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(45px);
+  transition: 
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.65s ease;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Card 1 Active State */
+.tps-split-card[data-card-index="0"].is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Card 1 Exited State (Transitions up as Card 2 comes in) */
+.tps-split-card[data-card-index="0"].is-passed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-45px);
+  pointer-events: none;
+}
+
+/* Card 2 Active State */
+.tps-split-card[data-card-index="1"].is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Card 2 Exited State */
+.tps-split-card[data-card-index="1"].is-passed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-45px);
+  pointer-events: none;
+}
+
+/* Content Header Row */
+.tps-split-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.tps-split-card-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 9999px;
+}
+
+.tps-split-card[data-card-index="0"] .tps-split-card-tag {
+  background: #eef2ff;
+  color: #323edd;
+  border: 1px solid #c7d2fe;
+}
+
+.tps-split-card[data-card-index="1"] .tps-split-card-tag {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+}
+
+.tps-split-card-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.tps-split-card[data-card-index="0"] .tps-split-card-icon {
+  background: linear-gradient(135deg, #323edd 0%, #1e26aa 100%);
+  color: #ffffff;
+}
+
+.tps-split-card[data-card-index="1"] .tps-split-card-icon {
+  background: linear-gradient(135deg, #ffa41b 0%, #ea580c 100%);
+  color: #ffffff;
+}
+
+/* Content Title & Description */
+.tps-split-card-title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #0f172a;
+  margin: 0 0 14px 0;
+  line-height: 1.22;
+}
+
+.tps-split-card-desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+/* Features List */
+.tps-split-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.tps-split-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.tps-split-card[data-card-index="0"] .tps-split-feature-item i {
+  color: #323edd;
+  font-size: 16px;
+}
+
+.tps-split-card[data-card-index="1"] .tps-split-feature-item i {
+  color: #ea580c;
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-split-showcase-track {
+    height: auto;
+  }
+
+  .tps-split-showcase-viewport {
+    position: static;
+    height: auto;
+    max-height: none;
+    padding: 95px 0 70px;
+  }
+
+  .tps-split-stage {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .tps-split-image-col {
+    transform: none !important;
+  }
+
+  .tps-split-showcase-section.phase-intro .tps-split-image-col {
+    transform: none !important;
+  }
+
+  .tps-split-title {
+    font-size: 28px;
+  }
+
+  .tps-split-image-wrap {
+    height: 300px;
+  }
+
+  .tps-split-cards-col {
+    height: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .tps-split-cards-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: auto;
+  }
+
+  .tps-split-card {
+    position: static;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    height: auto;
+    padding: 0;
+  }
+
+  .tps-split-card-title {
+    font-size: 26px;
+  }
+
+  .tps-split-card-desc {
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-split-title {
+    font-size: 23px;
+  }
+
+  .tps-split-subtitle {
+    font-size: 13.5px;
+  }
+
+  .tps-split-image-wrap {
+    height: 240px;
+  }
+
+  .tps-split-card-title {
+    font-size: 22px;
+  }
+
+  .tps-split-card-desc {
+    font-size: 14px;
+  }
+}

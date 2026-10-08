@@ -1,0 +1,407 @@
+/* ==========================================================================
+   TPS Empire - "Consult us here in TPS Empire" Animated Horizontal Stream Showcase
+   Specifications:
+   1. Clean Header at top (Title + Subtitle).
+   2. Starting floating badge node with hand-drawn spiral knot.
+   3. Small Sharp Square Cards (180px x 180px, 0px border-radius) in a horizontal row.
+   4. THICK Full-Screen Edge-to-Edge glowing line starting from far-left screen boundary,
+      weaving through each card sequentially across the screen to the far-right boundary.
+   5. Alternating Brand Blue (#2432c9) & Brand Orange (#ea580c).
+   6. Centered "Consult Us Now" CTA button located directly below the row.
+   ========================================================================== */
+
+/* Main Section Runway */
+.tps-consult-flow-section {
+  position: relative;
+  width: 100%;
+  background: #fdfcf9;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  border-top: 1px solid #ede8de;
+  border-bottom: 1px solid #ede8de;
+  overflow: clip;
+}
+
+/* Extended Scroll Track for Sequential Reveal Runway */
+.tps-consult-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 280vh;
+}
+
+/* Pinned Sticky Viewport (Full Screen Width) */
+.tps-consult-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fdfcf9;
+  box-sizing: border-box;
+  padding: 40px 24px;
+}
+
+/* Background Atmospheric Canvas */
+.tps-consult-bg-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.tps-consult-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* --------------------------------------------------------------------------
+   Full-Screen Edge-to-Edge Dynamic SVG Thread (Thick & Solid - No Glow/Shine)
+   -------------------------------------------------------------------------- */
+.tps-consult-fullscreen-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* Thick Background Track Guide Line (Clean Flat Gray) */
+.tps-h-thread-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 12 10;
+  opacity: 1;
+}
+
+/* Thick Active Animated Line (Solid Brand Blue, No Filter/Glow/Shine) */
+.tps-h-thread-active {
+  fill: none;
+  stroke: #2432c9;
+  stroke-width: 9px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: none !important;
+}
+
+/* Leading Head Bead (Solid Flat Marker, No Glow/Shine) */
+.tps-h-thread-head {
+  fill: #2432c9;
+  stroke: #ffffff;
+  stroke-width: 3.5px;
+  filter: none !important;
+  transition: opacity 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Top Header Block (Appears First at Top)
+   -------------------------------------------------------------------------- */
+.tps-consult-header-block {
+  position: relative;
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 36px;
+  z-index: 4;
+}
+
+.tps-consult-main-title {
+  font-size: clamp(30px, 3.6vw, 46px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-consult-main-title span {
+  color: #2432c9;
+}
+
+.tps-consult-main-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #64748b;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal Cards Stream Stage & Deck Track
+   -------------------------------------------------------------------------- */
+.tps-consult-stream-stage {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+}
+
+.tps-consult-deck-track {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: nowrap;
+  z-index: 3;
+}
+
+/* --------------------------------------------------------------------------
+   Small Sharp Square Cards (1:1 Ratio, 180px x 180px, 0px Edges - Crisp Flat)
+   -------------------------------------------------------------------------- */
+.tps-stream-card {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 !important;
+  background: #ffffff;
+  box-shadow: none !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(28px) scale(0.95);
+  transition: 
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    visibility 0.45s ease;
+  will-change: transform, opacity;
+  z-index: 3;
+}
+
+/* Active State as Line Weaves Through */
+.tps-stream-card.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.tps-stream-card.is-active:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: none !important;
+}
+
+/* Square Card Inner Layout */
+.tps-square-card-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 14px;
+  box-sizing: border-box;
+}
+
+.tps-square-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.tps-stream-card:hover .tps-square-icon-box {
+  transform: translateY(-2px);
+}
+
+.tps-square-number {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  margin-bottom: 6px;
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+}
+
+.tps-square-label {
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: -0.2px;
+  font-family: 'Montserrat', sans-serif;
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+   Alternating Brand Color Themes (Blue #2432c9 & Orange #ea580c)
+   -------------------------------------------------------------------------- */
+/* Theme Blue */
+.tps-stream-card.theme-blue {
+  border: 2px solid #2432c9;
+  border-top: 5px solid #2432c9;
+}
+
+.tps-stream-card.theme-blue .tps-square-icon-box {
+  background: rgba(36, 50, 201, 0.08);
+  color: #2432c9;
+}
+
+.tps-stream-card.theme-blue .tps-square-number {
+  color: #2432c9;
+}
+
+/* Theme Orange */
+.tps-stream-card.theme-orange {
+  border: 2px solid #ea580c;
+  border-top: 5px solid #ea580c;
+}
+
+.tps-stream-card.theme-orange .tps-square-icon-box {
+  background: rgba(234, 88, 12, 0.08);
+  color: #ea580c;
+}
+
+.tps-stream-card.theme-orange .tps-square-number {
+  color: #ea580c;
+}
+
+/* --------------------------------------------------------------------------
+   Centered CTA Button Below Horizontal Row (Clean Flat Style)
+   -------------------------------------------------------------------------- */
+.tps-stream-end-node {
+  margin-top: 36px;
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+}
+
+.tps-stream-end-node.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tps-consult-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #2432c9;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 30px;
+  border-radius: 0;
+  text-decoration: none;
+  box-shadow: none !important;
+  transition: background 0.25s ease, transform 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+  white-space: nowrap;
+}
+
+.tps-consult-cta-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-consult-scroll-track {
+    height: auto;
+  }
+
+  .tps-consult-sticky-viewport {
+    position: static;
+    height: auto;
+    max-height: none;
+    padding: 70px 20px 80px;
+    overflow: visible;
+  }
+
+  .tps-consult-start-node {
+    display: none;
+  }
+
+  .tps-consult-fullscreen-svg {
+    display: none;
+  }
+
+  .tps-consult-deck-track {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .tps-stream-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .tps-stream-end-node {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-consult-main-title {
+    font-size: 26px;
+  }
+
+  .tps-consult-main-desc {
+    font-size: 14px;
+  }
+
+  .tps-consult-deck-track {
+    gap: 16px;
+    max-width: 340px;
+  }
+
+  .tps-square-number {
+    font-size: 28px;
+  }
+
+  .tps-square-label {
+    font-size: 12.5px;
+  }
+}

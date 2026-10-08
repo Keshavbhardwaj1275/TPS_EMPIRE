@@ -1,0 +1,219 @@
+/* ==========================================================================
+   TPS Empire - Scroll-Driven "Our Insights & Creative Ideas" Scatter-Stack
+   Initial State: Cards stacked in a deck -> Scroll: Blossom outward into 3x2 grid
+   Matches reference video transition animation | Theme: Dark Footer Navy (#05091f)
+   ========================================================================== */
+
+/* Main Section Track (Provides scroll runway for blossoming animation) */
+.tps-insights-scatter-section {
+  position: relative;
+  width: 100%;
+  height: 340vh;
+  background: #05091f;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  z-index: 12;
+  overflow: clip;
+}
+
+/* Ambient Radial Glow */
+.tps-insights-scatter-section::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(50, 62, 221, 0.18) 0%, rgba(5, 9, 31, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Sticky Viewport (Locks in screen center while user scrolls through track) */
+.tps-insights-scatter-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #05091f;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* Header */
+.tps-insights-header {
+  text-align: center;
+  margin-bottom: 28px;
+  z-index: 10;
+}
+
+.tps-insights-title {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.tps-insights-title span {
+  color: #323edd;
+}
+
+.tps-insights-subtitle {
+  font-size: 14.5px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Scatter / Blossom Grid Stage
+   -------------------------------------------------------------------------- */
+.tps-insights-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1140px;
+  height: 520px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+  z-index: 10;
+}
+
+/* Individual Insight Card */
+.tps-insight-card {
+  position: relative;
+  background: #ffffff;
+  color: #1a1a2e;
+  border-radius: 8px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  will-change: transform, opacity;
+  transform-origin: center center;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.tps-insight-card:hover {
+  box-shadow: 0 20px 48px rgba(50, 62, 221, 0.3);
+  border-color: #323edd;
+}
+
+/* Rating Stars */
+.tps-card-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffa41b;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* Quote Text */
+.tps-card-quote {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0 0 14px 0;
+  flex-grow: 1;
+}
+
+/* Author Info Row */
+.tps-card-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.tps-card-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #ffa41b;
+}
+
+.tps-card-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.tps-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1.2;
+}
+
+.tps-card-role {
+  font-size: 11px;
+  font-weight: 600;
+  color: #323edd;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-insights-scatter-section {
+    height: auto;
+    padding: 70px 0 80px;
+  }
+
+  .tps-insights-scatter-viewport {
+    position: static;
+    height: auto;
+  }
+
+  .tps-insights-title {
+    font-size: 30px;
+  }
+
+  .tps-insights-stage {
+    height: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+
+  .tps-insight-card {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-insights-title {
+    font-size: 24px;
+  }
+
+  .tps-insights-stage {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tps-insight-card {
+    padding: 16px 18px;
+  }
+}

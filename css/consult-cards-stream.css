@@ -1,0 +1,413 @@
+/* ==========================================================================
+   TPS Empire - "Consult us here in TPS Empire" Horizontal Sliding Stream
+   Specifications:
+   1. Sliding Rail Peek Effect: 
+      - The active card is in primary focus on the left
+      - The NEXT card peeks in immediately to the right with its badge, icon & title visible
+   2. Prominent Numbers: Large 28px bold white badges for maximum impact
+   3. Alternating Brand Blue (#2432c9) & Orange (#ea580c) Colors
+   4. Sharp 0px Geometric Edges
+   5. Smooth Scroll-Driven Scrubbing with Expandable Description Drawer
+   ========================================================================== */
+
+/* Main Section Wrapper */
+.tps-consult-stream-section {
+  position: relative;
+  width: 100%;
+  background: #fbfbf9;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  overflow: clip;
+}
+
+/* Extended Scroll Track (Runway for 4 distinct card transitions) */
+.tps-consult-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 340vh;
+}
+
+/* Sticky Viewport (Pinned in screen during scroll) */
+.tps-consult-sticky-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 50px 0 40px;
+}
+
+/* Inner 2-Column Split Layout */
+.tps-consult-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 50px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Static Clean Content with Sharp Step Dots
+   -------------------------------------------------------------------------- */
+.tps-consult-static-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.tps-consult-badge {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  color: #2432c9;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.tps-consult-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.8px;
+  color: #0f172a;
+  margin: 0 0 18px 0;
+}
+
+.tps-consult-title span {
+  color: #2432c9;
+}
+
+.tps-consult-desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #475569;
+  margin: 0 0 28px 0;
+  max-width: 480px;
+}
+
+/* Consult Us CTA Link Button (Sharp edges, redirects to contact.html) */
+.tps-consult-cta-wrap {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.tps-consult-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #2432c9;
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 0;
+  text-decoration: none !important;
+  box-shadow: 0 6px 20px rgba(36, 50, 201, 0.22);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-consult-cta-btn:hover {
+  background-color: #ea580c;
+  box-shadow: 0 8px 26px rgba(234, 88, 12, 0.35);
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+.tps-consult-cta-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.tps-consult-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Sliding Rail Stage (Shows Active Card + Next Peeking Card)
+   -------------------------------------------------------------------------- */
+.tps-consult-cards-col {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Horizontal Card Rail */
+.tps-consult-cards-rail {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Individual Card (Fixed Width with Sharp Edges) */
+.tps-consult-card {
+  position: relative;
+  width: 360px;
+  min-width: 360px;
+  max-width: 360px;
+  height: 100%;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-shrink: 0;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  opacity: 0.82;
+}
+
+/* Active Card in Primary View */
+.tps-consult-card.is-active {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Modular Card Anatomy (Sharp 0px Corners)
+   -------------------------------------------------------------------------- */
+
+/* Upper Main Box */
+.tps-card-upper-box {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  border-radius: 0;
+  padding: 24px 26px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.tps-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Large Prominent Pure White Badge (750, 568, 478, 780) */
+.tps-card-num-badge {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  color: #0f172a;
+  background-color: #ffffff;
+  padding: 8px 22px;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+}
+
+/* Center Meaningful Vector Icon Art */
+.tps-card-art {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}
+
+.tps-line-art-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+/* Lower Box (Attached Bottom Panel with Title Always Visible) */
+.tps-card-lower-box {
+  width: 100%;
+  border-radius: 0;
+  padding: 18px 24px 20px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* Title is always visible on active and peeking cards */
+.tps-card-title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Description starts collapsed on peeking cards */
+.tps-card-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: 
+    max-height 0.4s ease,
+    opacity 0.35s ease,
+    margin-top 0.4s ease;
+  will-change: max-height, opacity;
+}
+
+/* When Card is Active: Lower description smoothly opens / expands */
+.tps-consult-card.is-active .tps-card-desc {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 8px;
+  transition: 
+    max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+    opacity 0.45s ease 0.15s,
+    margin-top 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+/* --------------------------------------------------------------------------
+   Alternating Brand Colors (Royal Blue & Sunset Orange)
+   -------------------------------------------------------------------------- */
+
+/* Theme Brand Blue (Cards 1 & 3: 750 Project Complete, 478 Business Partners) */
+.tps-consult-card.theme-brand-blue .tps-card-upper-box,
+.tps-consult-card.theme-brand-blue .tps-card-lower-box {
+  background-color: #2432c9;
+}
+
+/* Theme Brand Orange (Cards 2 & 4: 568 Happy Clients, 780 IT Consultant) */
+.tps-consult-card.theme-brand-orange .tps-card-upper-box,
+.tps-consult-card.theme-brand-orange .tps-card-lower-box {
+  background-color: #ea580c;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .tps-consult-scroll-track {
+    height: auto;
+  }
+
+  .tps-consult-sticky-viewport {
+    position: static;
+    height: auto;
+    max-height: none;
+    padding: 70px 0 80px;
+    overflow: visible;
+  }
+
+  .tps-consult-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .tps-consult-static-col {
+    padding-right: 0;
+  }
+
+  .tps-consult-title {
+    font-size: 32px;
+  }
+
+  .tps-consult-cards-col {
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .tps-consult-cards-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    height: auto;
+    width: 100%;
+    transform: none !important;
+  }
+
+  .tps-consult-card {
+    position: static;
+    opacity: 1 !important;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .tps-consult-card .tps-card-desc {
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-top: 8px !important;
+  }
+
+  .tps-consult-step-indicator {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .tps-consult-title {
+    font-size: 27px;
+  }
+
+  .tps-consult-desc {
+    font-size: 15px;
+  }
+
+  .tps-card-upper-box {
+    height: 290px;
+    padding: 18px 20px;
+  }
+
+  .tps-card-num-badge {
+    font-size: 24px;
+    padding: 6px 16px;
+  }
+
+  .tps-card-art {
+    height: 190px;
+  }
+
+  .tps-card-lower-box {
+    padding: 16px 20px 18px;
+  }
+
+  .tps-card-title {
+    font-size: 18px;
+  }
+
+  .tps-card-desc {
+    font-size: 13px;
+  }
+}

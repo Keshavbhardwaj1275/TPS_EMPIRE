@@ -1,0 +1,153 @@
+/* ==========================================================================
+   TPS Empire - Smooth Page-to-Page Transition Engine
+   Elegant curtain reveal & exit sweep matching the website brand theme
+   ========================================================================== */
+
+/* Page Content Initial State during load */
+body.tps-page-transitioning {
+  overflow: hidden !important;
+}
+
+/* --------------------------------------------------------------------------
+   Page Transition Overlay & Curtain
+   -------------------------------------------------------------------------- */
+.tps-page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background Curtain Panel (Solid Matte Brand Midnight Navy) */
+.tps-transition-curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #09101d;
+  transform: translateY(0%);
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+/* Secondary Accent Brand Royal Blue Wave */
+.tps-transition-curtain::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #323edd 0%, #ffa41b 50%, #323edd 100%);
+  background-size: 200% 100%;
+  animation: tpsTransitionGlow 2s infinite linear;
+}
+
+@keyframes tpsTransitionGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Brand Identity Center Emblem */
+.tps-transition-brand {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.tps-transition-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Minimalist Progress Track */
+.tps-transition-loader-bar {
+  width: 120px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.tps-transition-loader-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: #323edd;
+  animation: tpsTransitionProgress 1s infinite ease-in-out;
+}
+
+@keyframes tpsTransitionProgress {
+  0% { left: -40%; width: 30%; }
+  50% { width: 60%; }
+  100% { left: 100%; width: 30%; }
+}
+
+/* --------------------------------------------------------------------------
+   Active & Dismissed Transition States
+   -------------------------------------------------------------------------- */
+/* Page Reveal: Slide curtain away to top */
+.tps-page-transition-overlay.is-loaded .tps-transition-curtain {
+  transform: translateY(-100%);
+}
+
+.tps-page-transition-overlay.is-loaded .tps-transition-brand {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Page Exit: Sweep curtain in from bottom */
+.tps-page-transition-overlay.is-exiting {
+  pointer-events: auto;
+}
+
+.tps-page-transition-overlay.is-exiting .tps-transition-curtain {
+  transform: translateY(0%) !important;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tps-page-transition-overlay.is-exiting .tps-transition-brand {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.3s ease 0.15s, transform 0.3s ease 0.15s;
+}
+
+/* --------------------------------------------------------------------------
+   Global Top Scroll Progress Bar
+   -------------------------------------------------------------------------- */
+.tps-scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  background: transparent;
+}
+
+.tps-scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #323edd, #ffa41b);
+  transition: width 0.1s linear;
+}

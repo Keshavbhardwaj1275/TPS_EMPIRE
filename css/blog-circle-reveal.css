@@ -1,0 +1,240 @@
+/* ==========================================================================
+   TPS Empire - Blog Section Horizontal Circle Split & Emergence Animation
+   Clean, Flat, Razor-Sharp Design (Zero gloss / shadows):
+   - "Read our latest blog" header is visible ALL THE TIME at top
+   - Center Circle splits HORIZONTALLY (Left moves left, Right moves right)
+   - Blog cards have 100% SHARP EDGES (border-radius: 0)
+   - Blog cards appear ONLY when the circle is fully opened
+   ========================================================================== */
+
+/* Outer Scroll Track for smooth scroll pacing */
+.tps-blog-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 230vh;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Pinned Viewport Stage - Clean Solid Flat Background */
+.tps-blog-sticky-stage {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 24px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 15;
+  background: #f8fafc;
+}
+
+/* Header - VISIBLE ALL THE TIME AT THE TOP */
+.tps-blog-fixed-header {
+  position: relative;
+  z-index: 30;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.tps-blog-section-title {
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.7px;
+  margin: 0 0 6px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-blog-section-sub {
+  font-size: 14.5px;
+  color: #64748b;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Interactive Center Stage Container */
+.tps-blog-center-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+
+/* --------------------------------------------------------------------------
+   HORIZONTAL SPLIT CIRCLE (LEFT & RIGHT HALVES) - CLEAN & FLAT
+   -------------------------------------------------------------------------- */
+.tps-circle-half {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 84px;
+  z-index: 25;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transition: opacity 0.2s ease;
+}
+
+/* Left Half Circle */
+.tps-circle-left {
+  right: 50%;
+  transform: translateY(-50%);
+  transform-origin: right center;
+}
+
+/* Right Half Circle */
+.tps-circle-right {
+  left: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.tps-globe-half-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  /* Zero glow/drop-shadow */
+}
+
+/* --------------------------------------------------------------------------
+   BLOG CARDS CONTAINER - SHARP EDGES & NO GLOSS
+   Appears only when the circle is fully opened
+   -------------------------------------------------------------------------- */
+.tps-blog-emerge-container {
+  position: relative;
+  width: 100%;
+  z-index: 20;
+  transform-origin: center center;
+  transform: scale(0.94) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+}
+
+.tps-blog-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tps-blog-card-item {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0 !important; /* 100% SHARP EDGES */
+  overflow: hidden;
+  box-shadow: none !important; /* ZERO SHADOW / GLOSS */
+  transition: border-color 0.25s ease, transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tps-blog-card-item:hover {
+  transform: translateY(-4px);
+  border-color: #2432c9;
+  box-shadow: none !important;
+}
+
+.tps-blog-card-item .block-20 {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border-radius: 0 !important; /* SHARP EDGES */
+  transition: transform 0.4s ease;
+}
+
+.tps-blog-card-item:hover .block-20 {
+  transform: scale(1.03);
+}
+
+.tps-blog-card-item .text {
+  padding: 18px 20px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid #f1f5f9;
+}
+
+.tps-blog-card-item .heading {
+  margin: 0;
+}
+
+.tps-blog-card-item .heading a {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #0f172a;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tps-blog-card-item:hover .heading a {
+  color: #2432c9;
+}
+
+/* Bottom CTA Button - SHARP EDGES & NO GLOSS */
+.tps-blog-cta-row {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.tps-blog-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2432c9;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 32px;
+  border-radius: 0 !important; /* SHARP EDGES */
+  text-decoration: none !important;
+  box-shadow: none !important; /* ZERO GLOSS */
+  transition: background 0.25s ease, transform 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tps-blog-more-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: none !important;
+}
+
+/* Responsive Adaptations */
+@media (max-width: 991.98px) {
+  .tps-blog-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .tps-blog-card-item .block-20 {
+    height: 140px;
+  }
+}
