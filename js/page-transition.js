@@ -16,7 +16,7 @@
       overlay.innerHTML = 
         '<div class="tps-transition-curtain"></div>' +
         '<div class="tps-transition-brand">' +
-          '<img src="images/logo.png" alt="TPS Empire" class="tps-transition-logo">' +
+          '<img src="images/tps-logo-circle.png" alt="TPS Empire" class="tps-transition-logo">' +
           '<div class="tps-transition-loader-bar"></div>' +
         '</div>';
       document.body.appendChild(overlay);

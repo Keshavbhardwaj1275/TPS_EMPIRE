@@ -63,7 +63,7 @@
       floatingLogo.href = basePrefix + 'index.html';
       floatingLogo.setAttribute('aria-label', 'TPS Empire Home');
       floatingLogo.setAttribute('title', 'TPS Empire Home');
-      floatingLogo.innerHTML = '<img src="' + basePrefix + 'images/logo.png?v=4" alt="TPS Empire Logo" class="brand-logo">';
+      floatingLogo.innerHTML = '<img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire Logo" class="brand-logo">';
       document.body.appendChild(floatingLogo);
     }
 
@@ -82,7 +82,7 @@
         '<div class="tps-offcanvas-panel">',
         '  <div class="tps-offcanvas-top-bar">',
         '    <a href="' + basePrefix + 'index.html" class="tps-offcanvas-brand" aria-label="TPS Empire Home">',
-        '      <img src="' + basePrefix + 'images/logo.png?v=4" alt="TPS Empire Logo" class="brand-logo">',
+        '      <img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire Logo" class="brand-logo">',
         '      <span class="brand-text">TPS <span>Empire</span></span>',
         '    </a>',
         '    <button type="button" class="tps-offcanvas-close" id="tpsOffcanvasClose" aria-label="Close navigation menu">',
