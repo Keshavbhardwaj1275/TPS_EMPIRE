@@ -32,7 +32,7 @@
 .tps-ecosystem-section {
   position: relative;
   background: #ffffff;
-  padding: 85px 0 95px;
+  padding: 42px 0 40px;
   width: 100%;
   overflow: hidden;
   border-top: 1px solid #e2e8f0;
@@ -93,6 +93,13 @@
 }
 
 @media (max-width: 767px) {
+  .tps-fullwidth-stage-wrapper {
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
   .tps-ecosystem-stage {
     min-height: 390px;
   }
@@ -606,7 +613,7 @@
    -------------------------------------------------------------------------- */
 @media (max-width: 991px) {
   .tps-ecosystem-section {
-    padding: 60px 0 70px;
+    padding: 30px 0 28px;
   }
 
   .tps-hub-plate {

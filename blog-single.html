@@ -31,6 +31,9 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#2563eb">
 
+	<!-- Enforce HTTPS & Secure Upgrades -->
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -89,9 +92,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts with display=swap -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/tps-favicon-circle.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/tps-favicon-circle.png">
@@ -111,6 +111,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </noscript>
+	<link rel="stylesheet" href="css/responsive.css?v=1">
 </head>
 <body>
   <div class="wrap">
@@ -146,6 +147,7 @@
        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
        <li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
+       <li class="nav-item"><a href="career.html" class="nav-link">Career</a></li>
        <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
        <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
        <li class="nav-item cta"><a href="contact.html" class="nav-link">Free Consultation</a></li>
@@ -163,7 +165,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 ftco-animate">
-        <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
+        <h1 class="mb-3">It is a long established fact a reader be distracted</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
         <p>
           <img src="images/image_6.jpg" alt="Modern Information Technology Infrastructure and Systems" class="img-fluid">
@@ -180,10 +182,10 @@
         <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
         <div class="tag-widget post-tag-container mb-5 mt-5">
           <div class="tagcloud">
-            <a href="#" class="tag-cloud-link">Life</a>
-            <a href="#" class="tag-cloud-link">Sport</a>
-            <a href="#" class="tag-cloud-link">Tech</a>
-            <a href="#" class="tag-cloud-link">Travel</a>
+            <a href="blog.html" class="tag-cloud-link">Life</a>
+            <a href="blog.html" class="tag-cloud-link">Sport</a>
+            <a href="blog.html" class="tag-cloud-link">Tech</a>
+            <a href="blog.html" class="tag-cloud-link">Travel</a>
           </div>
         </div>
         
@@ -209,7 +211,7 @@
                 <h3>John Doe</h3>
                 <div class="meta">June 29, 2020 at 1:15pm</div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                <p><a href="#" class="reply">Reply</a></p>
+                <p><a href="#comment-form" class="reply">Reply</a></p>
               </div>
             </li>
 
@@ -221,7 +223,7 @@
                 <h3>John Doe</h3>
                 <div class="meta">June 29, 2020 at 1:15pm</div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                <p><a href="#" class="reply">Reply</a></p>
+                <p><a href="#comment-form" class="reply">Reply</a></p>
               </div>
 
               <ul class="children">
@@ -233,7 +235,7 @@
                     <h3>John Doe</h3>
                     <div class="meta">June 29, 2020 at 1:15pm</div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
+                    <p><a href="#comment-form" class="reply">Reply</a></p>
                   </div>
 
 
@@ -246,7 +248,7 @@
                         <h3>John Doe</h3>
                         <div class="meta">June 29, 2020 at 1:15pm</div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
+                        <p><a href="#comment-form" class="reply">Reply</a></p>
                       </div>
 
                       <ul class="children">
@@ -258,7 +260,7 @@
                             <h3>John Doe</h3>
                             <div class="meta">June 29, 2020 at 1:15pm</div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
+                            <p><a href="#comment-form" class="reply">Reply</a></p>
                           </div>
                         </li>
                       </ul>
@@ -276,15 +278,15 @@
                 <h3>John Doe</h3>
                 <div class="meta">June 29, 2020 at 1:15pm</div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                <p><a href="#" class="reply">Reply</a></p>
+                <p><a href="#comment-form" class="reply">Reply</a></p>
               </div>
             </li>
           </ul>
           <!-- END comment-list -->
           
-          <div class="comment-form-wrap pt-5">
+          <div class="comment-form-wrap pt-5" id="comment-form">
             <h3 class="mb-5">Leave a comment</h3>
-            <form action="#" class="p-5 bg-light">
+            <form action="contact.html" method="get" class="p-5 bg-light">
               <div class="form-group">
                 <label for="name">Name *</label>
                 <input type="text" class="form-control" id="name">
@@ -313,57 +315,57 @@
       </div> <!-- .col-md-8 -->
       <div class="col-lg-4 sidebar ftco-animate">
         <div class="sidebar-box">
-          <form action="#" class="search-form">
+          <form action="blog.html" method="get" class="search-form">
             <div class="form-group">
               <span class="icon fa fa-search"></span>
-              <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+              <input type="text" class="form-control" placeholder="Type a keyword and hit enter" aria-label="Search blog posts">
             </div>
           </form>
         </div>
         <div class="sidebar-box ftco-animate">
           <div class="categories">
             <h3>Categories</h3>
-            <li><a href="#">UI/UX Design <span>(12)</span></a></li>
-            <li><a href="#">Branding <span>(22)</span></a></li>
-            <li><a href="#">Web Design <span>(37)</span></a></li>
-            <li><a href="#">Web Develoment <span>(42)</span></a></li>
-            <li><a href="#">Application <span>(14)</span></a></li>
-            <li><a href="#">Illustration <span>(140)</span></a></li>
+            <li><a href="services.html">UI/UX Design <span>(12)</span></a></li>
+            <li><a href="services.html">Branding <span>(22)</span></a></li>
+            <li><a href="services.html">Web Design <span>(37)</span></a></li>
+            <li><a href="services.html">Web Development <span>(42)</span></a></li>
+            <li><a href="services.html">Application <span>(14)</span></a></li>
+            <li><a href="services.html">Illustration <span>(140)</span></a></li>
           </div>
         </div>
 
         <div class="sidebar-box ftco-animate">
           <h3>Recent Blog</h3>
           <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+            <a href="blog.html" class="blog-img mr-4" style="background-image: url(images/image_1.jpg);" aria-label="Read industry-oriented training article"></a>
             <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <h3 class="heading"><a href="blog.html">Even the all-powerful Pointing has no control about the blind texts</a></h3>
               <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> June 29, 2020</a></div>
-                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                <div><a href="blog.html"><span class="icon-calendar"></span> June 29, 2020</a></div>
+                <div><a href="about.html"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#comment-form"><span class="icon-chat"></span> 19</a></div>
               </div>
             </div>
           </div>
           <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+            <a href="blog.html" class="blog-img mr-4" style="background-image: url(images/image_2.jpg);" aria-label="Read professional website insights article"></a>
             <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <h3 class="heading"><a href="blog.html">Even the all-powerful Pointing has no control about the blind texts</a></h3>
               <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> June 29, 2020</a></div>
-                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                <div><a href="blog.html"><span class="icon-calendar"></span> June 29, 2020</a></div>
+                <div><a href="about.html"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#comment-form"><span class="icon-chat"></span> 19</a></div>
               </div>
             </div>
           </div>
           <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+            <a href="blog.html" class="blog-img mr-4" style="background-image: url(images/image_3.jpg);" aria-label="Read TPS Empire technology blog article"></a>
             <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <h3 class="heading"><a href="blog.html">Even the all-powerful Pointing has no control about the blind texts</a></h3>
               <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> June 29, 2020</a></div>
-                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                <div><a href="blog.html"><span class="icon-calendar"></span> June 29, 2020</a></div>
+                <div><a href="about.html"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#comment-form"><span class="icon-chat"></span> 19</a></div>
               </div>
             </div>
           </div>
@@ -372,14 +374,14 @@
         <div class="sidebar-box ftco-animate">
           <h3>Tag Cloud</h3>
           <div class="tagcloud">
-            <a href="#" class="tag-cloud-link">tech</a>
-            <a href="#" class="tag-cloud-link">computer</a>
-            <a href="#" class="tag-cloud-link">cat</a>
-            <a href="#" class="tag-cloud-link">ui</a>
-            <a href="#" class="tag-cloud-link">ux</a>
-            <a href="#" class="tag-cloud-link">web</a>
-            <a href="#" class="tag-cloud-link">design</a>
-            <a href="#" class="tag-cloud-link">innovation</a>
+            <a href="blog.html" class="tag-cloud-link">tech</a>
+            <a href="blog.html" class="tag-cloud-link">computer</a>
+            <a href="blog.html" class="tag-cloud-link">cat</a>
+            <a href="blog.html" class="tag-cloud-link">ui</a>
+            <a href="blog.html" class="tag-cloud-link">ux</a>
+            <a href="blog.html" class="tag-cloud-link">web</a>
+            <a href="blog.html" class="tag-cloud-link">design</a>
+            <a href="blog.html" class="tag-cloud-link">innovation</a>
           </div>
         </div>
 
@@ -393,21 +395,7 @@
   </div>
 </section> <!-- .section -->
 
-<!-- Fluid Multi-Layer Wave Section Transition Over Footer -->
-<div class="tps-wave-section-transition tps-wave-footer-transition">
-	<!-- Layer 1: Vibrant Orange Wave (Top Layer) -->
-	<svg class="tps-wave-svg tps-wave-layer-1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-		<path class="tps-wave-path-1" fill="rgba(5, 9, 31, 0.25)" d="M0,130 C240,240 440,20 720,130 C1000,240 1200,50 1440,120 L1440,320 L0,320 Z"></path>
-	</svg>
-	<!-- Layer 2: Light Amber/Peach Wave (Middle Layer) -->
-	<svg class="tps-wave-svg tps-wave-layer-2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-		<path class="tps-wave-path-2" fill="rgba(5, 9, 31, 0.6)" d="M0,175 C300,70 540,270 820,160 C1100,50 1280,220 1440,165 L1440,320 L0,320 Z"></path>
-	</svg>
-	<!-- Layer 3: Midnight Navy Base Layer connecting seamlessly into Footer #05091f -->
-	<svg class="tps-wave-svg tps-wave-layer-3" viewBox="0 0 1440 320" preserveAspectRatio="none">
-		<path class="tps-wave-path-3" fill="#05091f" d="M0,230 C320,150 600,290 920,200 C1200,120 1340,260 1440,220 L1440,320 L0,320 Z"></path>
-	</svg>
-</div>
+
 
 <footer class="ftco-footer ftco-footer-2 ftco-section">
   <div class="container">
@@ -432,6 +420,7 @@
             <li><a href="contact.html" class="py-2 d-block">Contact</a></li>
             <li><a href="services.html" class="py-2 d-block">Services</a></li>
             <li><a href="blog.html" class="py-2 d-block">Blog</a></li>
+            <li><a href="career.html" class="py-2 d-block">Career</a></li>
             <li><a href="faq.html" class="py-2 d-block">FAQs</a></li>
           </ul>
         </div>

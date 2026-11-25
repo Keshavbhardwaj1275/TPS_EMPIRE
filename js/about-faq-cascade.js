@@ -156,17 +156,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      // Automatically reveal answer on cursor hover
-      card.addEventListener('mouseenter', () => {
-        clearTimeout(hoverTimeout);
-        openCard();
-      });
+      // Automatically reveal answer on cursor hover for fine-pointer devices only
+      if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        card.addEventListener('mouseenter', () => {
+          clearTimeout(hoverTimeout);
+          openCard();
+        });
 
-      card.addEventListener('mouseleave', () => {
-        hoverTimeout = setTimeout(() => {
-          closeCard();
-        }, 220);
-      });
+        card.addEventListener('mouseleave', () => {
+          hoverTimeout = setTimeout(() => {
+            closeCard();
+          }, 220);
+        });
+      }
 
       card.addEventListener('click', toggleCard);
       card.addEventListener('keydown', (e) => {

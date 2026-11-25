@@ -64,7 +64,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #323edd;
+  color: #60a5fa;
   margin-bottom: 16px;
 }
 
@@ -73,18 +73,18 @@
   font-weight: 800;
   letter-spacing: -1px;
   line-height: 1.15;
-  color: #090f35;
+  color: #ffffff;
   margin-bottom: 18px;
 }
 
 .tps-sticky-main-title span {
-  color: #323edd;
+  color: #3b82f6;
 }
 
 .tps-sticky-subtitle {
   font-size: 16.5px;
   line-height: 1.65;
-  color: #555c6d;
+  color: #cbd5e1;
   margin-bottom: 24px;
 }
 

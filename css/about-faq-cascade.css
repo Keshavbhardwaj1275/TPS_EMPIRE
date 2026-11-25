@@ -44,35 +44,27 @@
 }
 
 /* --------------------------------------------------------------------------
-   FLUID MULTI-LAYER WAVE SECTION TRANSITION OVER FOOTER
+   FLUID MULTI-LAYER WAVE SECTION TRANSITION OVER FOOTER (REMOVED)
    -------------------------------------------------------------------------- */
 .tps-wave-footer-transition {
-  position: relative;
-  width: 100%;
-  height: 120px;
-  margin-top: 0;
-  margin-bottom: -2px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 25;
-}
-
-.tps-wave-footer-transition + .ftco-footer {
-  will-change: transform;
-  transition: transform 0.15s ease-out;
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
 
 @media (max-width: 991.98px) {
   .tps-wave-footer-transition {
-    height: 90px;
-    margin-top: 0;
+    display: none !important;
+    height: 0 !important;
   }
 }
 
 @media (max-width: 767.98px) {
   .tps-wave-footer-transition {
-    height: 70px;
-    margin-top: 0;
+    display: none !important;
+    height: 0 !important;
   }
 }
 
@@ -516,11 +508,18 @@
   margin-top: 0;
 }
 
-.tps-faq-card.is-open .tps-faq-a-drawer,
-.tps-faq-card:hover .tps-faq-a-drawer {
+.tps-faq-card.is-open .tps-faq-a-drawer {
   max-height: 500px;
   opacity: 1;
   margin-top: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tps-faq-card:hover .tps-faq-a-drawer {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 8px;
+  }
 }
 
 .tps-faq-a-text {

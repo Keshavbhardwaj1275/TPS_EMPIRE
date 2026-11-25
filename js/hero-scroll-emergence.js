@@ -133,7 +133,8 @@
         guyOpacity = 1.0;
       }
 
-      focalCenterpiece.style.transform = 'translate3d(-50%, calc(-50% + ' + guyOffsetY.toFixed(1) + 'px), 0) scale3d(' + guyScale.toFixed(3) + ', ' + guyScale.toFixed(3) + ', 1)';
+      var currentGuyScale = isMobile ? (guyScale * 0.95) : guyScale;
+      focalCenterpiece.style.transform = 'translate3d(-50%, calc(-50% + ' + guyOffsetY.toFixed(1) + 'px), 0) scale3d(' + currentGuyScale.toFixed(3) + ', ' + currentGuyScale.toFixed(3) + ', 1)';
       focalCenterpiece.style.opacity = guyOpacity.toFixed(3);
 
       // ----------------------------------------------------------------------
@@ -151,7 +152,10 @@
         if (isMobile) targetDist = 0;
 
         if (!isMobile) {
-          var currentDistX = targetDist * emergeT;
+          var cardWidth = cardLeft.offsetWidth || (isTablet ? 240 : 290);
+          var maxSafeDist = Math.max(120, (window.innerWidth / 2) - (cardWidth / 2) - 16);
+          var safeTargetDist = Math.min(targetDist, maxSafeDist);
+          var currentDistX = safeTargetDist * emergeT;
           var leftRot = 3.5 * (1 - emergeT);
           var rightRot = -3.5 * (1 - emergeT);
 
@@ -167,8 +171,22 @@
           cardRight.style.pointerEvents = emergeT > 0.8 ? 'auto' : 'none';
           cardRight.style.visibility = 'visible';
         } else {
-          // Mobile responsive vertical spread
-          var mobileDistY = 95 * emergeT;
+          // Mobile responsive vertical spread with dedicated non-overlapping slots
+          var vSpread;
+          if (window.innerWidth <= 375) {
+            vSpread = 150;
+          } else if (window.innerWidth <= 480) {
+            vSpread = 160;
+          } else {
+            vSpread = 165;
+          }
+          var stageHeight = stage ? stage.offsetHeight : 0;
+          var cardHeight = Math.max(cardLeft.offsetHeight || 0, cardRight.offsetHeight || 0, 104);
+          if (stageHeight > 0) {
+            var maxSafeSpread = Math.max(115, (stageHeight / 2) - (cardHeight / 2) - 8);
+            vSpread = Math.min(vSpread, maxSafeSpread);
+          }
+          var mobileDistY = vSpread * emergeT;
           cardLeft.style.transform = 'translate3d(-50%, calc(-50% - ' + mobileDistY.toFixed(1) + 'px), 0) scale3d(' + cardScale.toFixed(3) + ', ' + cardScale.toFixed(3) + ', 1)';
           cardLeft.style.opacity = cardOpacity.toFixed(3);
           cardLeft.style.pointerEvents = emergeT > 0.8 ? 'auto' : 'none';

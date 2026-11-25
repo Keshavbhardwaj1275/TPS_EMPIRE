@@ -94,6 +94,22 @@
 
     // Main render loop with ultra-smooth linear interpolation (lerp)
     function renderLoop() {
+      var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      var isMobile = windowWidth <= 767.98;
+
+      if (isMobile) {
+        if (sheet) {
+          sheet.style.transform = '';
+        }
+        cardData.forEach(function (card) {
+          if (!card.el) return;
+          card.el.style.transform = '';
+          card.el.style.opacity = '';
+        });
+        isRunning = false;
+        return;
+      }
+
       // Very gentle lerping factor for calm, slow, luxurious movement
       var diff = targetProgress - currentProgress;
       if (Math.abs(diff) > 0.0001) {
@@ -153,6 +169,20 @@
     }
 
     function onScroll() {
+      var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      if (windowWidth <= 767.98) {
+        if (sheet) {
+          sheet.style.transform = '';
+        }
+        cardData.forEach(function (card) {
+          if (!card.el) return;
+          card.el.style.transform = '';
+          card.el.style.opacity = '';
+        });
+        isRunning = false;
+        return;
+      }
+
       targetProgress = calculateScrollProgress();
       if (!isRunning) {
         isRunning = true;

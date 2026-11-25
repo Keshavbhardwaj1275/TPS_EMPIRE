@@ -28,8 +28,10 @@
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 100vw;
   height: 100vh;
   overflow: hidden;
+  contain: layout paint;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -474,6 +476,154 @@
   }
 
   .tps-emergence-header {
+    max-width: 540px;
+  }
+
+  .tps-emergence-stage {
+    height: 420px;
+  }
+
+  .tps-focal-centerpiece {
+    width: 190px;
+  }
+
+  .tps-guy-img {
+    max-height: 190px;
+  }
+
+  .tps-emergent-card {
+    width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tps-hero-preview-row {
+    top: 1% !important;
+    height: 160px !important;
+  }
+
+  .tps-hero-preview-card {
+    width: 106px !important;
+    height: 106px !important;
+    padding: 8px 4px !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="0"] {
+    left: calc(50% - 165px) !important;
+    top: 20px !important;
+    transform: rotate(-6deg) !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="1"] {
+    left: calc(50% - 53px) !important;
+    top: 0px !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="2"] {
+    left: calc(50% + 59px) !important;
+    top: 20px !important;
+    transform: rotate(6deg) !important;
+  }
+
+  .tps-preview-icon {
+    font-size: 20px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .tps-preview-title {
+    font-size: 9.5px !important;
+    line-height: 1.2 !important;
+  }
+
+  .tps-emergence-header {
+    max-width: 360px;
+  }
+
+  .tps-emergence-title {
+    font-size: 20px !important;
+  }
+
+  .tps-emergence-subtitle {
+    display: none;
+  }
+
+  .tps-emergence-stage {
+    height: 440px !important;
+  }
+
+  .tps-focal-centerpiece {
+    width: 210px !important;
+  }
+
+  .tps-guy-img {
+    max-height: 200px !important;
+  }
+
+  .tps-emergent-card {
+    width: 250px !important;
+  }
+
+  .tps-service-box {
+    padding: 18px 16px !important;
+  }
+
+  .tps-service-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 20px !important;
+  }
+
+  .tps-service-body h3 {
+    font-size: 16px !important;
+  }
+
+  .tps-service-body p {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    -webkit-line-clamp: unset !important;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .tps-hero-preview-row {
+    top: 0.5% !important;
+    height: 145px !important;
+  }
+
+  .tps-hero-preview-card {
+    width: 92px !important;
+    height: 92px !important;
+    padding: 6px 3px !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="0"] {
+    left: calc(50% - 142px) !important;
+    top: 16px !important;
+    transform: rotate(-6deg) !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="1"] {
+    left: calc(50% - 46px) !important;
+    top: 0px !important;
+  }
+
+  .tps-hero-preview-card[data-preview-index="2"] {
+    left: calc(50% + 50px) !important;
+    top: 16px !important;
+    transform: rotate(6deg) !important;
+  }
+
+  .tps-preview-icon {
+    font-size: 17px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .tps-preview-title {
+    font-size: 8.5px !important;
+    line-height: 1.15 !important;
+  }
+
+  .tps-emergence-header {
     margin-bottom: 8px;
   }
 
@@ -486,14 +636,18 @@
   }
 
   .tps-emergence-stage {
-    height: 280px;
+    height: 440px;
   }
 
   .tps-focal-centerpiece {
-    width: 170px;
+    width: 200px;
   }
 
   .tps-emergent-card {
-    width: 210px;
+    width: 250px;
+  }
+
+  .tps-guy-img {
+    max-height: 190px;
   }
 }

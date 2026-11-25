@@ -66,8 +66,10 @@
       var isDesktop = window.innerWidth > 991.98;
 
       if (!isDesktop) {
-        // Mobile fallback - ensure at least first slide is active
-        setActiveSlide(0);
+        // Mobile accordion is tap-driven; preserve user selection on scroll
+        if (activeIndex === -1) {
+          setActiveSlide(0);
+        }
         return;
       }
 

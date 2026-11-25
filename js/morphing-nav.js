@@ -35,6 +35,7 @@
     var isAbout = currentPath.indexOf('about') !== -1;
     var isServices = currentPath.indexOf('services') !== -1;
     var isBlog = currentPath.indexOf('blog') !== -1;
+    var isCareer = currentPath.indexOf('career') !== -1;
     var isFaq = currentPath.indexOf('faq') !== -1;
     var isContact = currentPath.indexOf('contact') !== -1;
 
@@ -95,6 +96,7 @@
         '      <li><a href="' + basePrefix + 'about.html" class="tps-nav-link ' + (isAbout ? 'active' : '') + '"><span>About</span></a></li>',
         '      <li><a href="' + basePrefix + 'services.html" class="tps-nav-link ' + (isServices ? 'active' : '') + '"><span>Services</span></a></li>',
         '      <li><a href="' + basePrefix + 'blog.html" class="tps-nav-link ' + (isBlog ? 'active' : '') + '"><span>Blog</span></a></li>',
+        '      <li><a href="' + basePrefix + 'career.html" class="tps-nav-link ' + (isCareer ? 'active' : '') + '"><span>Career</span></a></li>',
         '      <li><a href="' + basePrefix + 'faq.html" class="tps-nav-link ' + (isFaq ? 'active' : '') + '"><span>FAQ</span></a></li>',
         '      <li><a href="' + basePrefix + 'contact.html" class="tps-nav-link ' + (isContact ? 'active' : '') + '"><span>Contact</span></a></li>',
         '    </ul>',

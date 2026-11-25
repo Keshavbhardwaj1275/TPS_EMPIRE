@@ -55,7 +55,7 @@
   #ftco-navbar + .ftco-section:not(.tps-split-showcase-section),
   .ftco_navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
   .ftco_navbar + .ftco-section:not(.tps-split-showcase-section) {
-    padding-top: 170px !important;
+    padding-top: 140px !important;
   }
 
   .tps-hero-transition-section,
@@ -93,13 +93,20 @@
   }
 }
 
-/* When Scrolled: Shift Full Navbar to the Right and Fade Out */
+/* When Scrolled: Shift Full Navbar to the Right and Fade Out (Desktop only shifts X; Mobile stays centered to prevent overflow) */
 body.navbar-scrolled #ftco-navbar,
 body.navbar-scrolled .ftco_navbar {
   transform: translateX(40px) translateY(-30px) scale(0.96) !important;
   opacity: 0 !important;
   pointer-events: none !important;
   visibility: hidden !important;
+}
+
+@media (max-width: 991.98px) {
+  body.navbar-scrolled #ftco-navbar,
+  body.navbar-scrolled .ftco_navbar {
+    transform: translateY(-30px) scale(0.96) !important;
+  }
 }
 
 /* Top bar contact wrap fade out */
@@ -629,4 +636,19 @@ body.navbar-scrolled .faq-floating-hamburger-btn {
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E") no-repeat center / contain !important;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E") no-repeat center / contain !important;
   vertical-align: -0.125em !important;
+}
+
+/* Keep top navbar items on a single clean row across lg/xl viewports */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .ftco-navbar-light .navbar-nav > .nav-item:not(.cta) > .nav-link {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+    white-space: nowrap;
+  }
 }

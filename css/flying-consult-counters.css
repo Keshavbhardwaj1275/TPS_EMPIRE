@@ -10,6 +10,7 @@
   background: transparent;
   z-index: 25;
   margin-top: -60px;
+  overflow-x: clip !important;
 }
 
 /* Scroll-Pinned Track Container (Creates scroll distance for scrubbed animation) */
@@ -139,6 +140,7 @@
   background: #2531c4;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(50, 62, 221, 0.35);
+  
 }
 
 .tps-flying-cta-btn i {
@@ -382,63 +384,166 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767.98px) {
+  .tps-flying-consult-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: unset !important;
+    overflow-x: clip !important;
+  }
+
   .tps-flying-scroll-track {
-    height: 340vh;
+    height: auto !important;
+    min-height: unset !important;
+    position: relative !important;
+  }
+
+  .tps-flying-sticky-viewport {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .tps-flying-sheet-layer {
+    position: relative !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 48px 0 56px !important;
+    border-top-left-radius: 28px !important;
+    border-top-right-radius: 28px !important;
+    box-shadow: 0 -18px 45px rgba(0, 0, 0, 0.08) !important;
+    transform: none !important;
+    display: block !important;
+  }
+
+  .tps-flying-stage-container {
+    position: relative !important;
+    min-height: unset !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .tps-flying-center-content {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 24px 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .tps-flying-badge {
+    display: inline-block !important;
+    font-size: 11px !important;
+    letter-spacing: 1.5px !important;
+    padding: 5px 14px !important;
+    margin-bottom: 12px !important;
   }
 
   .tps-flying-title {
-    font-size: 24px;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 12px !important;
   }
 
   .tps-flying-subtitle {
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 0 auto 20px !important;
+    max-width: 440px !important;
+  }
+
+  .tps-flying-cta-row {
+    display: flex !important;
+    justify-content: center !important;
+    margin-bottom: 6px !important;
+  }
+
+  .tps-flying-cta-btn {
+    padding: 12px 28px !important;
+    font-size: 14px !important;
   }
 
   .tps-flying-card {
-    padding: 14px 16px;
-    gap: 10px;
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    min-width: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+    padding: 14px 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06) !important;
+    border-radius: 12px !important;
+  }
+
+  .tps-flying-card-1,
+  .tps-flying-card-2,
+  .tps-flying-card-3,
+  .tps-flying-card-4 {
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
   }
 
   .tps-flying-icon-box {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    font-size: 16px;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
   }
 
   .tps-flying-number {
-    font-size: 24px;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+  }
+
+  .tps-flying-plus {
+    font-size: 18px !important;
   }
 
   .tps-flying-label {
-    font-size: 11px;
+    font-size: 11.5px !important;
+    letter-spacing: 0.4px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
   }
+}
 
-  .tps-flying-card-1 {
-    bottom: 160px;
-    left: 16px;
-    width: calc(100% - 32px);
+@media (min-width: 540px) and (max-width: 767.98px) {
+  .tps-flying-stage-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    max-width: 580px !important;
   }
-
-  .tps-flying-card-2 {
-    bottom: 108px;
-    left: 16px;
-    right: auto;
-    width: calc(100% - 32px);
+  .tps-flying-center-content {
+    grid-column: 1 / -1 !important;
   }
-
-  .tps-flying-card-3 {
-    bottom: 56px;
-    left: 16px;
-    width: calc(100% - 32px);
-  }
-
-  .tps-flying-card-4 {
-    bottom: 4px;
-    left: 16px;
-    right: auto;
-    width: calc(100% - 32px);
+  .tps-flying-card {
+    max-width: 100% !important;
   }
 }

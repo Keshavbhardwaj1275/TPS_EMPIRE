@@ -3,9 +3,10 @@
   RewriteEngine On
   RewriteBase /
 
-  # Enforce HTTPS (optional/recommended when SSL is active)
-  # RewriteCond %{HTTPS} off
-  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Enforce HTTPS
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # If requested resource is not a directory
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -66,6 +67,7 @@
 
 # Security & SEO Headers
 <IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"

@@ -6,6 +6,5 @@ Disallow: /scratch_duplicates.json
 Disallow: /readme.txt
 Disallow: /scss/
 
-# Host and Sitemap
-Host: https://tpsempire.co.in
+# Sitemap
 Sitemap: https://tpsempire.co.in/sitemap.xml

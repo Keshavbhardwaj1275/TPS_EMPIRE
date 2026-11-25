@@ -9074,14 +9074,11 @@ textarea.form-control {
   z-index: 25; }
 
 .tps-wave-footer-transition {
-  position: relative;
-  width: 100%;
-  height: 120px;
-  margin-top: 0;
-  margin-bottom: -2px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 25; }
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important; }
 
 .tps-wave-svg {
   position: absolute;
