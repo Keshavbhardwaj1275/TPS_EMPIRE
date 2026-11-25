@@ -7,30 +7,14 @@
   'use strict';
 
   function initPageTransition() {
-    // 1. Create or bind the overlay element
-    var overlay = document.getElementById('tpsPageTransitionOverlay');
-    if (!overlay) {
-      var path = window.location.pathname;
-      var basePrefix = '';
-      if (path.indexOf('/legal/privacy-policy/') !== -1 || path.indexOf('/legal/terms-and-conditions/') !== -1 || path.indexOf('/legal/cookie-policy/') !== -1 || path.indexOf('/legal/disclaimer/') !== -1) {
-        basePrefix = '../../';
-      } else if (path.indexOf('/legal/') !== -1 || path.indexOf('/faq/') !== -1) {
-        basePrefix = '../';
-      }
-
-      overlay = document.createElement('div');
-      overlay.id = 'tpsPageTransitionOverlay';
-      overlay.className = 'tps-page-transition-overlay';
-      overlay.innerHTML = 
-        '<div class="tps-transition-curtain"></div>' +
-        '<div class="tps-transition-brand">' +
-          '<img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire" class="tps-transition-logo">' +
-          '<div class="tps-transition-loader-bar"></div>' +
-        '</div>';
-      document.body.appendChild(overlay);
+    // Remove any leftover blocking overlay elements if cached in DOM
+    var oldOverlay = document.getElementById('tpsPageTransitionOverlay');
+    if (oldOverlay && oldOverlay.parentNode) {
+      oldOverlay.parentNode.removeChild(oldOverlay);
     }
+    document.body.classList.remove('tps-page-transitioning');
 
-    // 2. Create Scroll Progress Bar
+    // 1. Scroll Progress Bar
     var progressTrack = document.getElementById('tpsScrollProgressTrack');
     if (!progressTrack) {
       progressTrack = document.createElement('div');
@@ -41,7 +25,9 @@
     }
 
     var progressBar = document.getElementById('tpsScrollProgressBar');
+    var scrollTicking = false;
     function updateScrollProgress() {
+      scrollTicking = false;
       if (!progressBar) return;
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -50,81 +36,79 @@
         progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
       }
     }
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (!scrollTicking) {
+        scrollTicking = true;
+        window.requestAnimationFrame(updateScrollProgress);
+      }
+    }, { passive: true });
     updateScrollProgress();
 
-    // 3. Reveal immediately on DOM ready without blocking on window.load
-    function revealPage() {
-      overlay.classList.add('is-loaded');
-      overlay.classList.remove('is-exiting');
-      document.body.classList.remove('tps-page-transitioning');
+    // 2. Speculation Rules (instant prerender/prefetch on hover/tap in Chromium)
+    if (window.location.protocol !== 'file:' &&
+        window.HTMLScriptElement &&
+        typeof HTMLScriptElement.supports === 'function' &&
+        HTMLScriptElement.supports('speculationrules')) {
+      var specScript = document.createElement('script');
+      specScript.type = 'speculationrules';
+      specScript.textContent = JSON.stringify({
+        prerender: [{
+          where: {
+            and: [
+              { href_matches: '/*' },
+              { not: { href_matches: '/*\\#*' } }
+            ]
+          },
+          eagerness: 'moderate'
+        }]
+      });
+      document.head.appendChild(specScript);
     }
 
-    if (typeof requestAnimationFrame === 'function') {
-      requestAnimationFrame(revealPage);
-    } else {
-      revealPage();
-    }
-
-    // Handle back/forward cache in browsers
-    window.addEventListener('pageshow', function (event) {
-      if (event.persisted) {
-        revealPage();
-      }
-    });
-
-    // 4. Intercept Internal Link Clicks for Smooth Exit Sweep
-    document.addEventListener('click', function (e) {
-      var link = e.target.closest('a');
-      if (!link) return;
-
-      var href = link.getAttribute('href');
-      var target = link.getAttribute('target');
-
-      // Check if valid internal HTML page link
-      if (
-        !href ||
-        href.startsWith('#') ||
-        href.startsWith('javascript:') ||
-        href.startsWith('tel:') ||
-        href.startsWith('mailto:') ||
-        target === '_blank' ||
-        e.ctrlKey ||
-        e.metaKey ||
-        e.shiftKey
-      ) {
-        return;
-      }
-
-      // Check if URL points to same domain / internal html
-      var url;
-      try {
-        url = new URL(link.href, window.location.origin);
-      } catch (err) {
-        return;
-      }
-
-      if (url.origin === window.location.origin) {
-        // If clicking link to current exact URL, allow default
-        if (url.pathname === window.location.pathname && url.hash) {
+    // 3. Lightweight Link Prefetch Fallback on Hover / Touchstart (for zero-delay page switching)
+    if (window.location.protocol !== 'file:') {
+      var prefetchedUrls = {};
+      function prefetchLink(target) {
+        var link = target && target.closest ? target.closest('a') : null;
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('tel:') || href.startsWith('mailto:')) {
           return;
         }
+        if (link.target === '_blank') return;
 
-        e.preventDefault();
-        overlay.classList.remove('is-loaded');
-        overlay.classList.add('is-exiting');
+        var url;
+        try {
+          url = new URL(link.href, window.location.origin);
+        } catch (err) {
+          return;
+        }
+        if (url.origin !== window.location.origin) return;
+        if (url.pathname === window.location.pathname) return;
 
-        // Navigate after smooth exit curtain animation
-        setTimeout(function () {
-          window.location.href = link.href;
-        }, 200);
+        var cleanHref = url.href.split('#')[0];
+        if (prefetchedUrls[cleanHref]) return;
+        prefetchedUrls[cleanHref] = true;
 
-        // Failsafe timeout
-        setTimeout(function () {
-          window.location.href = link.href;
-        }, 600);
+        var hint = document.createElement('link');
+        hint.rel = 'prefetch';
+        hint.as = 'document';
+        hint.href = cleanHref;
+        document.head.appendChild(hint);
       }
-    });
+
+      document.addEventListener('pointerenter', function (e) {
+        prefetchLink(e.target);
+      }, { capture: true, passive: true });
+
+      document.addEventListener('touchstart', function (e) {
+        prefetchLink(e.target);
+      }, { capture: true, passive: true });
+
+      document.addEventListener('focusin', function (e) {
+        prefetchLink(e.target);
+      }, { passive: true });
+    }
   }
 
   // Initialize immediately or on DOM ready
