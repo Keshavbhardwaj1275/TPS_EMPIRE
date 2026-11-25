@@ -33,8 +33,8 @@ body.tps-page-transitioning {
   width: 100%;
   height: 100%;
   background-color: #09101d;
-  transform: translateY(0%);
-  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  transform: translateY(-100%);
+  transition: transform 0.28s cubic-bezier(0.77, 0, 0.175, 1);
   will-change: transform;
 }
 
@@ -64,9 +64,9 @@ body.tps-page-transitioning {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .tps-transition-logo {

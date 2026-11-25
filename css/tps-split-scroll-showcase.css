@@ -477,8 +477,15 @@
   .tps-split-showcase-viewport {
     position: static;
     height: auto;
+    min-height: 0;
     max-height: none;
-    padding: 95px 0 70px;
+    padding: 110px 0 56px;
+  }
+
+  .tps-split-container {
+    height: auto;
+    max-height: none;
+    padding: 0 18px;
   }
 
   .tps-split-stage {
@@ -500,7 +507,8 @@
 
   .tps-split-image-wrap {
     height: auto;
-    margin-bottom: 24px;
+    min-height: 0;
+    margin-bottom: 20px;
   }
 
   .tps-split-cards-col {

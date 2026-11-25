@@ -127,7 +127,7 @@ iframe {
   }
 
   .tps-hero-statement-title {
-    font-size: 40px;
+    font-size: 46px;
   }
 }
 
@@ -397,24 +397,45 @@ iframe {
     display: none !important;
   }
 
-  /* Flush navbar positioning to eliminate blank gaps above the header */
+  /* Fixed dark single navbar across mobile/tablet (eliminates secondary white drawer) */
   #ftco-navbar,
-  .ftco_navbar {
+  .ftco_navbar,
+  #ftco-navbar.scrolled,
+  #ftco-navbar.scrolled.awake,
+  #ftco-navbar.scrolled.sleep,
+  body.navbar-scrolled #ftco-navbar,
+  body.navbar-scrolled .ftco_navbar {
     top: 0 !important;
-    position: absolute !important;
+    position: fixed !important;
     left: 0 !important;
     right: 0 !important;
+    margin-top: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
     background: #090f35 !important;
     padding: 8px 16px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+    z-index: 1050 !important;
   }
 
-  .ftco-navbar-light .navbar-brand {
+  .ftco-navbar-light .navbar-brand,
+  .ftco-navbar-light.scrolled .navbar-brand {
+    color: #ffffff !important;
     padding-top: 0.45rem !important;
     padding-bottom: 0.45rem !important;
   }
 
+  .ftco-navbar-light .navbar-brand span,
+  .ftco-navbar-light.scrolled .navbar-brand span {
+    color: #ffa41b !important;
+    margin-left: 5px;
+  }
+
   .navbar-brand .brand-logo,
-  .ftco-navbar-light .navbar-brand .brand-logo {
+  .ftco-navbar-light .navbar-brand .brand-logo,
+  .ftco-navbar-light.scrolled .navbar-brand .brand-logo {
     width: 44px !important;
     height: 44px !important;
     min-width: 44px !important;
@@ -422,12 +443,6 @@ iframe {
     max-width: 44px !important;
     max-height: 44px !important;
     margin-right: 10px !important;
-  }
-
-  /* Prevent scrolled navbar from pushing viewport horizontally */
-  body.navbar-scrolled #ftco-navbar,
-  body.navbar-scrolled .ftco_navbar {
-    transform: translateY(-30px) scale(0.96) !important;
   }
 
   /* Fix Bootstrap container width override from style.css */
@@ -438,8 +453,16 @@ iframe {
 
   /* Split showcase section (about.html) tablet clearance & proper spacing */
   .tps-split-showcase-viewport {
-    padding-top: 130px !important;
-    padding-bottom: 40px !important;
+    padding-top: 112px !important;
+    padding-bottom: 48px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .tps-split-container {
+    height: auto !important;
+    max-height: none !important;
   }
 
   .tps-split-header {
@@ -465,8 +488,9 @@ iframe {
   }
 
   .tps-split-image-wrap {
-    height: 220px !important;
-    margin-bottom: 16px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 12px !important;
   }
 
   .tps-split-img {
@@ -476,10 +500,11 @@ iframe {
   }
 
   .tps-split-status-pill {
-    top: 0 !important;
-    right: 4px !important;
-    padding: 4px 10px !important;
-    font-size: 9px !important;
+    top: auto !important;
+    right: auto !important;
+    margin: 0 auto 12px auto !important;
+    padding: 5px 12px !important;
+    font-size: 9.5px !important;
   }
 
   .tps-split-cards-stage {
@@ -496,18 +521,22 @@ iframe {
   }
 
   /* Mobile/Tablet navbar collapse styling */
-  .ftco-navbar-light .navbar-collapse {
-    background: rgba(9, 15, 53, 0.98);
+  .ftco-navbar-light .navbar-collapse,
+  .ftco-navbar-light.scrolled .navbar-collapse {
+    background: rgba(9, 15, 53, 0.98) !important;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-radius: 8px;
     padding: 16px 22px;
     margin-top: 12px;
+    max-height: calc(100dvh - 84px);
+    overflow-y: auto;
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link,
+  .ftco-navbar-light.scrolled .navbar-nav > .nav-item > .nav-link {
     color: #ffffff !important;
     padding: 11px 0 !important;
     font-size: 15px !important;
@@ -515,11 +544,13 @@ iframe {
     display: block;
   }
 
-  .ftco-navbar-light .navbar-nav > .nav-item.active > .nav-link {
+  .ftco-navbar-light .navbar-nav > .nav-item.active > .nav-link,
+  .ftco-navbar-light.scrolled .navbar-nav > .nav-item.active > .nav-link {
     color: #00d2ff !important;
   }
 
-  .ftco-navbar-light .navbar-nav > .nav-item.cta > .nav-link {
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > .nav-link,
+  .ftco-navbar-light.scrolled .navbar-nav > .nav-item.cta > .nav-link {
     background: #323edd !important;
     color: #ffffff !important;
     border-radius: 4px;
@@ -529,11 +560,13 @@ iframe {
     border-bottom: none !important;
   }
 
-  .ftco-navbar-light .navbar-toggler {
+  .ftco-navbar-light .navbar-toggler,
+  .ftco-navbar-light.scrolled .navbar-toggler {
     padding: 7px 12px;
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     color: #ffffff !important;
+    margin-right: 0 !important;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -624,7 +657,7 @@ iframe {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    padding-top: 104px !important;
+    padding-top: 152px !important;
     padding-bottom: 0 !important;
     z-index: 3 !important;
     box-sizing: border-box !important;
@@ -639,10 +672,10 @@ iframe {
   }
 
   .tps-hero-statement-title {
-    font-size: clamp(18px, 4.8vw, 22px) !important;
-    line-height: 1.3 !important;
+    font-size: clamp(23px, 6.2vw, 29px) !important;
+    line-height: 1.26 !important;
     margin: 0 auto !important;
-    padding: 0 16px !important;
+    padding: 0 12px !important;
     color: #ffffff !important;
     text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6) !important;
   }
@@ -815,8 +848,8 @@ iframe {
 
   /* Split showcase mobile clearance */
   .tps-split-showcase-viewport {
-    padding-top: 110px !important;
-    padding-bottom: 35px !important;
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
   }
 
   /* Legal page headers clearance on mobile & small tablets */
@@ -859,6 +892,10 @@ iframe {
   /* Emergence Section Web Dev Card & Illustration Layout (Zero Overlap) */
   .tps-hero-emergence-viewport {
     height: 100dvh !important;
+  }
+
+  .tps-hero-emergence-container {
+    padding-top: 82px !important;
   }
 
   .tps-emergence-stage {
@@ -1144,7 +1181,7 @@ iframe {
 
   /* Career page responsive improvements */
   .career-hero-section {
-    padding: 40px 16px 45px !important;
+    padding: 96px 16px 40px !important;
   }
 
   .career-hero-title {
@@ -1352,22 +1389,101 @@ iframe {
     align-items: center;
   }
 
-  /* Footer responsiveness */
-  .ftco-footer {
-    padding: 50px 0 25px !important;
+  /* Compact, polished mobile footer */
+  .ftco-footer,
+  .ftco-footer.ftco-section {
+    padding: 32px 0 18px !important;
+  }
+
+  .ftco-footer .row.mb-5 {
+    margin-bottom: 14px !important;
   }
 
   .ftco-footer-widget {
-    margin-bottom: 28px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .ftco-footer .ftco-footer-logo {
+    margin-bottom: 8px !important;
+    font-size: 18px !important;
+  }
+
+  .ftco-footer .ftco-footer-logo span {
+    margin-left: 5px;
   }
 
   .ftco-footer .ftco-footer-logo img,
   .ftco-footer .footer-logo {
-    height: 52px !important;
-    width: 52px !important;
-    min-width: 52px !important;
-    max-width: 52px !important;
+    height: 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
     margin-right: 10px !important;
+  }
+
+  .ftco-footer .ftco-footer-widget p {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .ftco-footer-social li a {
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+  }
+
+  .ftco-footer .ftco-heading-2 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px !important;
+  }
+
+  .ftco-footer .ftco-footer-widget ul li a {
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    padding: 3px 0 !important;
+  }
+
+  .ftco-footer .row:first-child > [class*="col-"]:nth-child(4) .ftco-footer-widget {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 0 !important;
+  }
+
+  .ftco-footer .block-23 {
+    margin-bottom: 0 !important;
+  }
+
+  .ftco-footer .block-23 ul li,
+  .ftco-footer .block-23 ul li > a {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ftco-footer .block-23 ul li:last-child,
+  .ftco-footer .block-23 ul li:last-child > a {
+    margin-bottom: 0 !important;
+  }
+
+  .ftco-footer .block-23 ul li .icon {
+    width: 22px !important;
+    font-size: 13px !important;
+    padding-right: 0 !important;
+    color: #ffa41b !important;
+  }
+
+  .ftco-footer .row:last-child {
+    padding-top: 12px !important;
+    margin-top: 4px !important;
+  }
+
+  .ftco-footer .row:last-child p {
+    font-size: 12px !important;
   }
 
   .ftco-footer p,
@@ -1504,7 +1620,7 @@ iframe {
 @media (max-width: 480px) {
   /* Hero emergence 3 curved cards fit within screen */
   .tps-hero-preview-row {
-    top: clamp(72px, 9vh, 80px) !important;
+    top: clamp(84px, 11vh, 92px) !important;
     height: 140px !important;
   }
 
@@ -1648,15 +1764,15 @@ iframe {
 
   /* Hero section statements */
   .tps-hero-stage1-content {
-    padding-top: 96px !important;
-    padding-bottom: 12px !important;
+    padding-top: 140px !important;
+    padding-bottom: 0 !important;
   }
 
   .tps-hero-statement-title {
-    font-size: 18px !important;
-    line-height: 1.3 !important;
+    font-size: clamp(21px, 6vw, 24px) !important;
+    line-height: 1.26 !important;
     margin-bottom: 0 !important;
-    padding: 0 12px !important;
+    padding: 0 10px !important;
   }
 
   .tps-hero-main-title {
@@ -1721,7 +1837,7 @@ iframe {
 
   /* Hero emergence 3 curved cards at 320px-375px */
   .tps-hero-preview-row {
-    top: clamp(72px, 9vh, 80px) !important;
+    top: clamp(82px, 11vh, 90px) !important;
     height: 135px !important;
   }
 
@@ -1978,14 +2094,14 @@ iframe {
 
   /* Ultra-narrow centerpiece canvas bounds */
   .tps-hero-stage1-content {
-    padding-top: 96px !important;
-    padding-bottom: 12px !important;
+    padding-top: 140px !important;
+    padding-bottom: 0 !important;
   }
 
   .tps-hero-statement-title {
-    font-size: 16.5px !important;
-    line-height: 1.28 !important;
-    padding: 0 8px !important;
+    font-size: clamp(21px, 6vw, 24px) !important;
+    line-height: 1.26 !important;
+    padding: 0 10px !important;
   }
 
   /* ==========================================================================
@@ -2191,6 +2307,12 @@ table {
     max-width: 100%;
   }
 
+  .ftco-footer .row:first-child > [class*="col-"]:nth-child(2),
+  .ftco-footer .row:first-child > [class*="col-"]:nth-child(3) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
   .contact-cards-track,
   .contact-card-item,
   .contact-card-item .dbox {
@@ -2233,12 +2355,12 @@ table {
 
 @media (max-width: 480px) {
   .career-hero-section {
-    padding-top: 30px !important;
+    padding-top: 94px !important;
     padding-bottom: 34px !important;
   }
 
   .career-hero-inner {
-    padding: 20px 4px 0 !important;
+    padding: 12px 4px 0 !important;
   }
 
   .career-eyebrow {
@@ -2266,12 +2388,12 @@ table {
 
 @media (max-width: 375.98px) {
   .career-hero-section {
-    padding-top: 24px !important;
+    padding-top: 90px !important;
     padding-bottom: 28px !important;
   }
 
   .career-hero-inner {
-    padding-top: 14px !important;
+    padding-top: 10px !important;
   }
 
   .career-eyebrow {

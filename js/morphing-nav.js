@@ -11,113 +11,36 @@
   });
 
   function initGlobalMorphingNav() {
-    // Dynamic relative base prefix calculation for root, subdirectories and deep nested pages
-    var basePrefix = '';
-    var styleLink = document.querySelector('link[href*="style.css"], link[href*="style.min.css"]');
-    if (styleLink) {
-      var href = styleLink.getAttribute('href');
-      var idx = href.indexOf('css/style');
-      if (idx !== -1) {
-        basePrefix = href.substring(0, idx);
+    // Remove any legacy secondary drawer/floating buttons so only the single dark navbar menu is used
+    ['tpsFloatingMenuBtn', 'faqFloatingMenuBtn', 'tpsFloatingCornerLogo', 'tpsOffcanvasNav', 'faqOffcanvasNav'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    });
+
+    var navbar = document.getElementById('ftco-navbar');
+    var navCollapse = document.getElementById('ftco-nav');
+    var navToggler = navbar ? navbar.querySelector('.navbar-toggler') : null;
+
+    function closeMobileMenu() {
+      if (!navCollapse || !navCollapse.classList.contains('show')) return;
+      if (window.jQuery && window.jQuery.fn && window.jQuery.fn.collapse) {
+        window.jQuery(navCollapse).collapse('hide');
+      } else {
+        navCollapse.classList.remove('show');
+        if (navToggler) {
+          navToggler.classList.add('collapsed');
+          navToggler.setAttribute('aria-expanded', 'false');
+        }
       }
     }
-    if (!basePrefix) {
-      var path = window.location.pathname;
-      if (path.indexOf('/legal/') !== -1 && (path.indexOf('/privacy-policy') !== -1 || path.indexOf('/terms-and-conditions') !== -1 || path.indexOf('/disclaimer') !== -1 || path.indexOf('/cookie-policy') !== -1)) {
-        basePrefix = '../../';
-      } else if (path.indexOf('/faq/') !== -1 || path.indexOf('/legal/') !== -1) {
-        basePrefix = '../';
-      }
-    }
 
-    var currentPath = window.location.pathname.toLowerCase();
-    var isHome = currentPath.endsWith('/') || currentPath.endsWith('/index.html') && currentPath.indexOf('/legal') === -1 && currentPath.indexOf('/faq') === -1 || currentPath.endsWith('public_html') || currentPath.endsWith('public_html (54)');
-    var isAbout = currentPath.indexOf('about') !== -1;
-    var isServices = currentPath.indexOf('services') !== -1;
-    var isBlog = currentPath.indexOf('blog') !== -1;
-    var isCareer = currentPath.indexOf('career') !== -1;
-    var isFaq = currentPath.indexOf('faq') !== -1;
-    var isContact = currentPath.indexOf('contact') !== -1;
-
-    // 1. Ensure Floating Hamburger Button exists in DOM
-    var floatingBtn = document.getElementById('tpsFloatingMenuBtn') || document.getElementById('faqFloatingMenuBtn');
-    if (!floatingBtn) {
-      floatingBtn = document.createElement('button');
-      floatingBtn.type = 'button';
-      floatingBtn.id = 'tpsFloatingMenuBtn';
-      floatingBtn.className = 'tps-floating-hamburger-btn';
-      floatingBtn.setAttribute('aria-label', 'Open Navigation Menu');
-      floatingBtn.setAttribute('aria-controls', 'tpsOffcanvasNav');
-      floatingBtn.setAttribute('title', 'Open Menu');
-      floatingBtn.innerHTML = '<span class="tps-hamburger-lines"><span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span></span>';
-      document.body.appendChild(floatingBtn);
-    } else {
-      floatingBtn.classList.add('tps-floating-hamburger-btn');
-    }
-
-    // 1b. Ensure Floating Top-Left Round TPS Logo exists in DOM
-    var floatingLogo = document.getElementById('tpsFloatingCornerLogo');
-    if (!floatingLogo) {
-      floatingLogo = document.createElement('a');
-      floatingLogo.id = 'tpsFloatingCornerLogo';
-      floatingLogo.className = 'tps-floating-corner-logo';
-      floatingLogo.href = basePrefix + 'index.html';
-      floatingLogo.setAttribute('aria-label', 'TPS Empire Home');
-      floatingLogo.setAttribute('title', 'TPS Empire Home');
-      floatingLogo.innerHTML = '<img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire Logo" class="brand-logo">';
-      document.body.appendChild(floatingLogo);
-    }
-
-    // 2. Ensure Off-Canvas Drawer exists in DOM
-    var drawer = document.getElementById('tpsOffcanvasNav') || document.getElementById('faqOffcanvasNav');
-    if (!drawer) {
-      drawer = document.createElement('div');
-      drawer.id = 'tpsOffcanvasNav';
-      drawer.className = 'tps-offcanvas-drawer';
-      drawer.setAttribute('role', 'dialog');
-      drawer.setAttribute('aria-modal', 'true');
-      drawer.setAttribute('aria-label', 'Main Navigation Menu');
-
-      drawer.innerHTML = [
-        '<div class="tps-offcanvas-backdrop"></div>',
-        '<div class="tps-offcanvas-panel">',
-        '  <div class="tps-offcanvas-top-bar">',
-        '    <a href="' + basePrefix + 'index.html" class="tps-offcanvas-brand" aria-label="TPS Empire Home">',
-        '      <img src="' + basePrefix + 'images/tps-logo-circle.png" alt="TPS Empire Logo" class="brand-logo">',
-        '      <span class="brand-text">TPS <span>Empire</span></span>',
-        '    </a>',
-        '    <button type="button" class="tps-offcanvas-close" id="tpsOffcanvasClose" aria-label="Close navigation menu">',
-        '      <i class="fa fa-times" aria-hidden="true"></i>',
-        '    </button>',
-        '  </div>',
-        '  <nav class="tps-offcanvas-nav">',
-        '    <ul class="tps-offcanvas-links">',
-        '      <li><a href="' + basePrefix + 'index.html" class="tps-nav-link ' + (isHome ? 'active' : '') + '"><span>Home</span></a></li>',
-        '      <li><a href="' + basePrefix + 'about.html" class="tps-nav-link ' + (isAbout ? 'active' : '') + '"><span>About</span></a></li>',
-        '      <li><a href="' + basePrefix + 'services.html" class="tps-nav-link ' + (isServices ? 'active' : '') + '"><span>Services</span></a></li>',
-        '      <li><a href="' + basePrefix + 'blog.html" class="tps-nav-link ' + (isBlog ? 'active' : '') + '"><span>Blog</span></a></li>',
-        '      <li><a href="' + basePrefix + 'career.html" class="tps-nav-link ' + (isCareer ? 'active' : '') + '"><span>Career</span></a></li>',
-        '      <li><a href="' + basePrefix + 'faq.html" class="tps-nav-link ' + (isFaq ? 'active' : '') + '"><span>FAQ</span></a></li>',
-        '      <li><a href="' + basePrefix + 'contact.html" class="tps-nav-link ' + (isContact ? 'active' : '') + '"><span>Contact</span></a></li>',
-        '    </ul>',
-        '  </nav>',
-        '</div>'
-      ].join('\n');
-
-      document.body.appendChild(drawer);
-    } else {
-      drawer.classList.add('tps-offcanvas-drawer');
-    }
-
-    var closeBtn = drawer.querySelector('.tps-offcanvas-close') || drawer.querySelector('#faqOffcanvasClose') || drawer.querySelector('#tpsOffcanvasClose');
-    var backdrop = drawer.querySelector('.tps-offcanvas-backdrop') || drawer.querySelector('.faq-offcanvas-backdrop');
-    var navLinks = drawer.querySelectorAll('.tps-nav-link, .faq-nav-link');
-
-    // 3. Scroll Monitoring for Morphing Transition & Footer Detection
+    // 1. Scroll Monitoring for Header Pinning & Wave Morphing
     var scrollThreshold = 45;
     var footerEl = document.querySelector('footer, .ftco-footer');
 
-    // 3b. Fluid Multi-Layer Wave Parallax & Morph Controller (Over FAQ & Footer on all pages)
+    // 1b. Fluid Multi-Layer Wave Parallax & Morph Controller (Over FAQ & Footer on all pages)
     var waveTransitions = document.querySelectorAll('.tps-wave-section-transition');
     function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -209,54 +132,26 @@
     window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
 
-    // 4. Open / Close Interactions
-    function openMenu() {
-      drawer.classList.add('open');
-      if (floatingBtn) floatingBtn.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    // 2. Single Mobile Navbar Collapse Interactions (close on link tap, outside tap, or Escape)
+    if (navCollapse) {
+      var collapseLinks = navCollapse.querySelectorAll('.nav-link');
+      collapseLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          closeMobileMenu();
+        });
+      });
 
-    function closeMenu() {
-      drawer.classList.remove('open');
-      if (floatingBtn) floatingBtn.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+      document.addEventListener('click', function (e) {
+        if (navbar && !navbar.contains(e.target)) {
+          closeMobileMenu();
+        }
+      });
 
-    if (floatingBtn) {
-      floatingBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (drawer.classList.contains('open')) {
-          closeMenu();
-        } else {
-          openMenu();
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeMobileMenu();
         }
       });
     }
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        closeMenu();
-      });
-    }
-
-    if (backdrop) {
-      backdrop.addEventListener('click', function () {
-        closeMenu();
-      });
-    }
-
-    navLinks.forEach(function (link) {
-      link.addEventListener('click', function () {
-        closeMenu();
-      });
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && drawer.classList.contains('open')) {
-        closeMenu();
-      }
-    });
   }
 })();

@@ -147,6 +147,21 @@
     // Interactive Click Toggle on Pill
     if (togglePill) {
       togglePill.addEventListener('click', function () {
+        var isDesktop = window.innerWidth > 991.98;
+        if (!isDesktop) {
+          var toTraining = !section.classList.contains('mode-training');
+          section.classList.toggle('mode-training', toTraining);
+          section.classList.toggle('mode-enterprise', !toTraining);
+          if (statusText) {
+            statusText.textContent = toTraining ? 'Training Active' : 'Enterprise Active';
+          }
+          var targetCard = toTraining ? card2 : card1;
+          if (targetCard && targetCard.scrollIntoView) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
+
         var rect = track.getBoundingClientRect();
         var scrollY = window.pageYOffset || document.documentElement.scrollTop;
         var trackTop = rect.top + scrollY;

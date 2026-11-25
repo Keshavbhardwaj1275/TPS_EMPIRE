@@ -21,24 +21,55 @@
     var scrollCue = document.getElementById('tpsHeroScrollCue');
     var navbar = document.getElementById('ftco-navbar');
 
+    var stage1Inner = stage1 ? stage1.querySelector('.tps-hero-stage1-inner') : null;
+
     if (!mediaCanvas || !stage1 || !stage2) return;
+
+    function getNavBottom() {
+      if (!navbar) return 0;
+      var navStyle = window.getComputedStyle(navbar);
+      if (navStyle.display === 'none') return 0;
+      return navbar.offsetTop + navbar.offsetHeight;
+    }
+
+    function getMobileVerticalMetrics(windowHeight) {
+      var navBottom = getNavBottom() || 72;
+      var textHeight = stage1Inner && stage1Inner.offsetHeight > 0 ? stage1Inner.offsetHeight : 96;
+      var maxCanvasForSpace = Math.max(170, windowHeight - navBottom - textHeight - 88);
+      var baseCanvasH = Math.min(windowHeight * 0.37, 330, maxCanvasForSpace);
+      var slack = Math.max(60, windowHeight - navBottom - textHeight - baseCanvasH);
+      var topGap = clamp(slack * 0.28, 36, 98);
+      var midGap = clamp((slack - topGap) * 0.48, 32, 128);
+      return {
+        paddingTop: Math.round(navBottom + topGap),
+        textBottom: Math.round(navBottom + topGap + textHeight),
+        midGap: midGap,
+        baseCanvasH: baseCanvasH
+      };
+    }
 
     function syncStage1Clearance() {
       var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      var isMobile = windowWidth <= 767.98;
       var isSmallViewport = windowWidth <= 991.98;
-      stage1.style.paddingTop = '';
 
-      if (navbar) {
-        var navStyle = window.getComputedStyle(navbar);
-        if (navStyle.display !== 'none') {
-          var navBottom = navbar.offsetTop + navbar.offsetHeight;
-          if (navBottom > 0) {
-            var currentTop = parseFloat(window.getComputedStyle(stage1).paddingTop) || 0;
-            var minClearance = Math.ceil(navBottom + (isSmallViewport ? 22 : 24));
-            if (currentTop < minClearance) {
-              stage1.style.paddingTop = minClearance + 'px';
-            }
-          }
+      if (isMobile) {
+        var metrics = getMobileVerticalMetrics(windowHeight);
+        stage1.style.paddingTop = metrics.paddingTop + 'px';
+        stage1.style.paddingBottom = '0px';
+        return;
+      }
+
+      stage1.style.paddingTop = '';
+      stage1.style.paddingBottom = '';
+
+      var navBottom = getNavBottom();
+      if (navBottom > 0) {
+        var currentTop = parseFloat(window.getComputedStyle(stage1).paddingTop) || 0;
+        var minClearance = Math.ceil(navBottom + (isSmallViewport ? 22 : 24));
+        if (currentTop < minClearance) {
+          stage1.style.paddingTop = minClearance + 'px';
         }
       }
     }
@@ -73,14 +104,11 @@
     }
 
     function getMobileMediaLayout(windowHeight) {
-      var s1Bottom = stage1.offsetHeight > 0 ? stage1.offsetHeight : 200;
-      var gap = clamp(windowHeight * 0.045, 22, 48);
-      var availableH = Math.max(160, windowHeight - s1Bottom - gap - 18);
-      var baseCanvasH = Math.min(windowHeight * 0.36, availableH);
-      var canvasCenter = s1Bottom + gap + (baseCanvasH / 2);
+      var metrics = getMobileVerticalMetrics(windowHeight);
+      var canvasCenter = metrics.textBottom + metrics.midGap + (metrics.baseCanvasH / 2);
       return {
-        heightVh: (baseCanvasH / windowHeight) * 100,
-        topPercent: clamp((canvasCenter / windowHeight) * 100, 34, 72)
+        heightVh: (metrics.baseCanvasH / windowHeight) * 100,
+        topPercent: clamp((canvasCenter / windowHeight) * 100, 34, 76)
       };
     }
 

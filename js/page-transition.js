@@ -53,19 +53,17 @@
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
     updateScrollProgress();
 
-    // 3. Play Reveal Animation on Page Load
+    // 3. Reveal immediately on DOM ready without blocking on window.load
     function revealPage() {
-      setTimeout(function () {
-        overlay.classList.add('is-loaded');
-        overlay.classList.remove('is-exiting');
-        document.body.classList.remove('tps-page-transitioning');
-      }, 80);
+      overlay.classList.add('is-loaded');
+      overlay.classList.remove('is-exiting');
+      document.body.classList.remove('tps-page-transitioning');
     }
 
-    if (document.readyState === 'complete') {
-      revealPage();
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(revealPage);
     } else {
-      window.addEventListener('load', revealPage);
+      revealPage();
     }
 
     // Handle back/forward cache in browsers
@@ -119,12 +117,12 @@
         // Navigate after smooth exit curtain animation
         setTimeout(function () {
           window.location.href = link.href;
-        }, 360);
+        }, 200);
 
         // Failsafe timeout
         setTimeout(function () {
           window.location.href = link.href;
-        }, 800);
+        }, 600);
       }
     });
   }

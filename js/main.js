@@ -2,14 +2,16 @@
 
 	"use strict";
 
-	$(window).stellar({
-    responsive: true,
-    parallaxBackgrounds: true,
-    parallaxElements: true,
-    horizontalScrolling: false,
-    hideDistantElements: false,
-    scrollProperty: 'scroll'
-  });
+	if ($.fn.stellar) {
+		$(window).stellar({
+			responsive: true,
+			parallaxBackgrounds: true,
+			parallaxElements: true,
+			horizontalScrolling: false,
+			hideDistantElements: false,
+			scrollProperty: 'scroll'
+		});
+	}
 
 
 	var fullHeight = function() {
@@ -33,9 +35,12 @@
 	loader();
 
 	// Scrollax
-   $.Scrollax();
+	if (typeof $.Scrollax === 'function') {
+		$.Scrollax();
+	}
 
 	var carousel = function() {
+		if (!$.fn.owlCarousel || $('.carousel-testimony').length === 0) return;
 		$('.carousel-testimony').owlCarousel({
 			autoplay: true,
 			autoHeight: true,
@@ -129,7 +134,8 @@
 	
 
 	var counter = function() {
-		
+		if (!$.fn.waypoint || !$.fn.animateNumber || $('.number').length === 0) return;
+
 		$('#section-counter, .hero-wrap, .ftco-counter').waypoint( function( direction ) {
 
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
@@ -138,7 +144,6 @@
 				$('.number').each(function(){
 					var $this = $(this),
 						num = $this.data('number');
-						console.log(num);
 					$this.animateNumber(
 					  {
 					    number: num,
@@ -156,6 +161,28 @@
 
 
 	var contentWayPoint = function() {
+		var animateEls = document.querySelectorAll('.ftco-animate');
+		if (!animateEls.length) return;
+
+		if (!$.fn.waypoint) {
+			if ('IntersectionObserver' in window) {
+				var io = new IntersectionObserver(function(entries) {
+					entries.forEach(function(entry) {
+						if (entry.isIntersecting) {
+							var el = entry.target;
+							var effect = el.getAttribute('data-animate-effect');
+							el.classList.add(effect === 'fadeIn' ? 'fadeIn' : effect === 'fadeInLeft' ? 'fadeInLeft' : effect === 'fadeInRight' ? 'fadeInRight' : 'fadeInUp', 'ftco-animated');
+							io.unobserve(el);
+						}
+					});
+				}, { rootMargin: '0px 0px -5% 0px' });
+				animateEls.forEach(function(el) { io.observe(el); });
+			} else {
+				animateEls.forEach(function(el) { el.classList.add('fadeInUp', 'ftco-animated'); });
+			}
+			return;
+		}
+
 		var i = 0;
 		$('.ftco-animate').waypoint( function( direction ) {
 
@@ -193,35 +220,36 @@
 
 
 	// magnific popup
-	$('.image-popup').magnificPopup({
-    type: 'image',
-    closeOnContentClick: true,
-    closeBtnInside: false,
-    fixedContentPos: true,
-    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-     gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      verticalFit: true
-    },
-    zoom: {
-      enabled: true,
-      duration: 300 // don't foget to change the duration also in CSS
-    }
-  });
+	if ($.fn.magnificPopup) {
+		$('.image-popup').magnificPopup({
+			type: 'image',
+			closeOnContentClick: true,
+			closeBtnInside: false,
+			fixedContentPos: true,
+			mainClass: 'mfp-no-margins mfp-with-zoom',
+			gallery: {
+				enabled: true,
+				navigateByImgClick: true,
+				preload: [0,1]
+			},
+			image: {
+				verticalFit: true
+			},
+			zoom: {
+				enabled: true,
+				duration: 300
+			}
+		});
 
-  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-    disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
-
-    fixedContentPos: false
-  });
+		$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+			disableOn: 700,
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false
+		});
+	}
 
   // Ensure tel: and mailto: protocol links trigger native browser handlers without interference
   $(document).on('click', 'a[href^="tel:"], a[href^="mailto:"]', function(e) {

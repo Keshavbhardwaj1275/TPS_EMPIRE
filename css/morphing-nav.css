@@ -77,7 +77,7 @@
   #ftco-navbar + .ftco-section:not(.tps-split-showcase-section),
   .ftco_navbar + section:not(.tps-hero-transition-section):not(.tps-split-showcase-section):not(.contact-scroll-stage-track):not(.tps-blog-stream-section):not(.faq-scroll-zoom-track):not(.hero-wrap):not(.tps-hero-emergence-section),
   .ftco_navbar + .ftco-section:not(.tps-split-showcase-section) {
-    padding-top: 45px !important;
+    padding-top: 96px !important;
   }
 
   .tps-hero-transition-section,
@@ -93,20 +93,60 @@
   }
 }
 
-/* When Scrolled: Shift Full Navbar to the Right and Fade Out (Desktop only shifts X; Mobile stays centered to prevent overflow) */
+/* Keep single navbar accessible on scroll without duplicate white drawer */
 body.navbar-scrolled #ftco-navbar,
-body.navbar-scrolled .ftco_navbar {
-  transform: translateX(40px) translateY(-30px) scale(0.96) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  visibility: hidden !important;
+body.navbar-scrolled .ftco_navbar,
+#ftco-navbar.scrolled,
+.ftco_navbar.scrolled,
+#ftco-navbar.scrolled.awake,
+#ftco-navbar.scrolled.sleep {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-top: 0 !important;
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  box-shadow: none !important;
 }
 
-@media (max-width: 991.98px) {
+@media (min-width: 992px) {
   body.navbar-scrolled #ftco-navbar,
-  body.navbar-scrolled .ftco_navbar {
-    transform: translateY(-30px) scale(0.96) !important;
+  body.navbar-scrolled .ftco_navbar,
+  #ftco-navbar.scrolled,
+  .ftco_navbar.scrolled {
+    top: 10px !important;
+    background: transparent !important;
   }
+
+  body.navbar-scrolled #ftco-navbar .brand-logo,
+  body.navbar-scrolled .ftco_navbar .brand-logo {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+  }
+
+  body.navbar-scrolled #ftco-navbar .navbar-brand,
+  body.navbar-scrolled #ftco-navbar .navbar-nav > .nav-item > .nav-link {
+    padding-top: 0.9rem !important;
+    padding-bottom: 0.9rem !important;
+  }
+}
+
+/* Remove secondary floating white off-canvas menu globally */
+.tps-floating-corner-logo,
+.tps-floating-hamburger-btn,
+.faq-floating-hamburger-btn,
+.tps-offcanvas-drawer,
+.faq-offcanvas-drawer {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Top bar contact wrap fade out */
